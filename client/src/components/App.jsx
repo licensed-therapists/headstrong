@@ -33,7 +33,6 @@ class App extends React.Component {
   getRandomQuote() {
     axios.get('/api/quotes')
       .then(({ data }) => {
-        console.log(data);
         const randomIndex = Math.floor(Math.random() * data.length + 1);
         this.setState({
           quoteText: data[randomIndex].text,
