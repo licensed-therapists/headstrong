@@ -12,11 +12,11 @@ const Entry = () => {
         </textarea>
 
       </div>
-  <div>
-    <button className="btn btn-primary float-right">Submit!</button>
-  </div>
-</div>
-)
+      <div>
+        <button className="btn btn-primary float-right">Submit!</button>
+      </div>
+    </div>
+  );
 };
 
 export default Entry;

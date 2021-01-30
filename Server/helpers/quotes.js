@@ -10,5 +10,4 @@ const getQuotes = () => {
 
 module.exports = {
   getQuotes,
-}
-;
+};

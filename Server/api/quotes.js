@@ -10,5 +10,4 @@ Quotes.get('/', (req, res) => {
 
 module.exports = {
   Quotes,
-}
-;
+};

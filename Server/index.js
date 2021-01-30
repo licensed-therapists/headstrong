@@ -13,6 +13,6 @@ app.use(express.static(dist));
 app.use('/api/quotes', Quotes);
 
 app.listen(port, () => {
-  console.log(`Server is listening on http://127.0.0.1:${port}`)
-})
+  console.log(`Server is listening on http://127.0.0.1:${port}`);
+});
 
