@@ -4,10 +4,11 @@ const { getQuotes } = require('../helpers/quotes');
 
 Quotes.get('/', (req, res) => {
   getQuotes()
-  .then((data) => res.send(data))
-  .catch(() => res.status(404));
+    .then((data) => res.status(200).json(data))
+    .catch(() => res.sendStatus(404));
 });
 
 module.exports = {
   Quotes,
 }
+;
