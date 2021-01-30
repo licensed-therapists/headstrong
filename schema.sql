@@ -19,4 +19,4 @@ CREATE TABLE entries (
   PRIMARY KEY (id)
 );
 
-INSERT into entries (username, title, body, journal_image, time_stamp) VALUES ("ian549", "sunday morning blues", "I've been feeling up this morning", "https://pbs.twimg.com/media/EmdsOxSXEAE224X.jpg", "saturday, Jan 30th,2021");
+INSERT into entries (username, title, blog, journal_image, time_stamp) VALUES ("ian549", "sunday morning blues", "I've been feeling up this morning", "https://pbs.twimg.com/media/EmdsOxSXEAE224X.jpg", "saturday, Jan 30th,2021");
