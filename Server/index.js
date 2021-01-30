@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const { Quotes } = require('./api/quotes');
 const { db, getAllJournals, addJournals } = require('./db/dbBase.js');
 
 const port = 3000;
@@ -10,6 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(dist));
+app.use('/api/quotes', Quotes);
 
 
 app.get('/api/journals', (req, res) => {

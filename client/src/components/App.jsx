@@ -1,7 +1,7 @@
 import React from 'react';
 import Entry from './Entry.jsx';
 import Quote from './MotivationalQuote.jsx';
-import Header from './Header.jsx'
+import Header from './Header.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +14,7 @@ class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(){
+  handleSubmit() {
     const {title, body } = this.state;
     //need to return axios.post here
     /*return axios.post('http://localhost:8000/api/articles', {
@@ -24,16 +24,16 @@ class App extends React.Component {
     });
     */
   }
-    render() {
-      return (
-        <div>
-          <Header />
-          <h1>Welcome to HeadStrong!</h1>
-          <Quote />
-          <Entry />
+  render() {
+    return (
+      <div>
+        <Header />
+        <h1>Welcome to HeadStrong!</h1>
+        <Quote />
+        <Entry />
       </div>
-      )
-    }
+    );
+  }
 
 
 
