@@ -1,29 +1,6 @@
 [
   {
-    "baseurl":"https://theysaidso.com",
-    "contents": {
-      "quotes": [
-        {
-          "author": "Paul Brown",
-          "background": "https://theysaidso.com/img/qod/qod-inspire.jpg",
-          "category": "inspire",
-          "date": "2020-11-11",
-          "id": "3dlKxoNAOZsB__Nb61H95weF",
-          "language": "en",
-          "length": "51",
-          "permalink": "https://theysaidso.com/quote/paul-brown-when-you-win-say-nothing-when-you-lose-say-less",
-          "quote": "When you win, say nothing. When you lose, say less.",
-          "tags": [],
-          "title": "Inspiring Quote of the day"
-        }
-      ]
-    },
-    "copyright": {
-      "url": "https://theysaidso.com",
-      "year": 2022
-    },
-    "success": {
-      "total": 1
-    }
+    "text": "Genius is one percent inspiration and ninety-nine percent perspiration.",
+    "author": "Thomas Edison"
   }
 ]
