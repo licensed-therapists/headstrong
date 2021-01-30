@@ -38,6 +38,10 @@ class App extends React.Component {
           quoteText: data[randomIndex].text,
           quoteAuthor: data[randomIndex].author
         });
+        const { quoteAuthor } = this.state;
+        if (quoteAuthor === null) {
+          this.setState({ quoteAuthor: 'Anonymous' });
+        }
       }).catch((err) => console.error(err));
   }
 
