@@ -21,7 +21,7 @@ app.get('/api/journals', (req, res) => {
 });
 
 app.post('/api/journals', (req, res) => {
-  return addJournals()
+  return addJournals(req.body)
     .then((data) => res.json(data))
     .catch((err) => console.warn(err));
 });
