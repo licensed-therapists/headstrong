@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const { Quotes } = require('./api/quotes');
+const { db, getAllJournals, addJournals } = require('./db/dbBase.js');
 
 const port = 3000;
 
@@ -11,6 +12,21 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(dist));
 app.use('/api/quotes', Quotes);
+
+
+app.get('/api/journals', (req, res) => {
+  return getAllJournals()
+    .then((data) => res.json(data))
+    .catch((err) => console.warn(err));
+});
+
+app.post('/api/journals', (req, res) => {
+  return addJournals()
+    .then((data) => res.json(data))
+    .catch((err) => console.warn(err));
+});
+
+
 
 app.listen(port, () => {
   console.log(`Server is listening on http://127.0.0.1:${port}`);
