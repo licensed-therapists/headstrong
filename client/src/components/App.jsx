@@ -1,52 +1,53 @@
 import React from 'react';
+import Entry from './Entry.jsx';
+import Quote from './MotivationalQuote.jsx';
+import Header from './Header.jsx'
+class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-const App = () => (
+    this.state = {
+      title: '',
+      body: ''
+    };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(){
+    const {title, body } = this.state;
+    //need to return axios.post here
+    /*return axios.post('http://localhost:8000/api/articles', {
+      title,
+      body,
+      author,
+    });
+    */
+  }
+    render() {
+      return (
+        <div>
+          <Header />
+          <h1>Welcome to HeadStrong!</h1>
+          <Quote />
+          <Entry />
+      </div>
+      )
+    }
+
+
+
+
+
+}
 
 // return (
-  <div>
-    <h1>Made in React</h1>
-  </div>
+
 //)
 
-)
-
-// class App extends React.Component {
-
-//   constructor() {
-//     super();
-//       this.state = {
-
-//       }
-//   }
-
-
-
-// // render() {
-// //  return (
-// //   <div>
-// //     <h1>Made in React</h1>
-// //   </div>
-// // )
-
-// // }
-
-
-// render() {
-//   return (
-//     <div className="shopping-list">
-//       <h1>Shopping List for {this.props.name}</h1>
-//       <ul>
-//         <li>Instagram</li>
-//         <li>WhatsApp</li>
-//         <li>Oculus</li>
-//       </ul>
-//     </div>
-//   );
-// }
 
 
 
 
-// }
 
 export default App;
