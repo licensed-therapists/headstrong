@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const mysql = require('mysql2');
 
 const db = mysql.createConnection({
@@ -17,10 +18,18 @@ const getAllJournals = () => {
   });
 };
 
-const addJournals = () => {
+const addJournals = (body) => {
+
+  // console.log(body);
+
+  // eslint-disable-next-line camelcase
+  const { username, title, blog, journal_image, time_stamp } = body;
+  // console.log(user);
+
   return new Promise((resolve, reject) => {
-    const string = 'INSERT into entries (username, title, body, journal_image, time_stamp, quote) VALUES(?, ?, ?, ?, ?, ?)';
-    db.query(string, (err, results) => {
+    const string = 'INSERT into entries (username, title, blog, journal_image, time_stamp, quote) VALUES (?, ?, ?, ?, ?)';
+    const args = [username, title, blog, journal_image, time_stamp];
+    db.query(string, args, (err, results) => {
       if (err) { return reject(err); }
       resolve(results);
     });
