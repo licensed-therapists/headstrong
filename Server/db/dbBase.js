@@ -27,7 +27,7 @@ const addJournals = (body) => {
   // console.log(user);
 
   return new Promise((resolve, reject) => {
-    const string = 'INSERT into entries (username, title, blog, journal_image, time_stamp, quote) VALUES (?, ?, ?, ?, ?)';
+    const string = 'INSERT into entries (username, title, blog, journal_image, time_stamp) VALUES (?, ?, ?, ?, ?)';
     const args = [username, title, blog, journal_image, time_stamp];
     db.query(string, args, (err, results) => {
       if (err) { return reject(err); }
