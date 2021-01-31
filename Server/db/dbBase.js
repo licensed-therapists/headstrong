@@ -19,12 +19,8 @@ const getAllJournals = () => {
 };
 
 const addJournals = (body) => {
-
-  // console.log(body);
-
   // eslint-disable-next-line camelcase
   const { username, title, blog, journal_image, time_stamp } = body;
-  // console.log(user);
 
   return new Promise((resolve, reject) => {
     const string = 'INSERT into entries (username, title, blog, journal_image, time_stamp) VALUES (?, ?, ?, ?, ?)';
@@ -36,7 +32,41 @@ const addJournals = (body) => {
   });
 };
 
+const deleteJournal = (body) => {
+  console.log(body);
+
+  const { title } = body;
+  return new Promise((resolve, reject) => {
+    const string = 'DELETE FROM entries WHERE title = ?';
+    const args = [title];
+
+    db.query(string, args, (err, results) => {
+      if (err) { return reject(err); }
+      resolve(results);
+    });
+  });
+};
+
+const updateJournal = (body) => {
+
+  const { blog, title, username } = body;
+
+  return new Promise((resolve, reject) => {
+    const string = 'UPDATE entries SET title = ?, blog = ? WHERE username = ?';
+    const args = [title, blog, username];
+
+    db.query(string, args, (err, results) => {
+      if (err) { return reject(err); }
+      resolve(results);
+    });
+  });
+
+};
+
+
 module.exports = {
   getAllJournals,
-  addJournals
+  addJournals,
+  deleteJournal,
+  updateJournal
 };

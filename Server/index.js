@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 const { Quotes } = require('./api/quotes');
-const { db, getAllJournals, addJournals } = require('./db/dbBase.js');
+const { db, getAllJournals, addJournals, deleteJournal, updateJournal} = require('./db/dbBase.js');
 
 const port = 3000;
 
@@ -24,6 +24,19 @@ app.post('/api/journals', (req, res) => {
   return addJournals(req.body)
     .then((data) => res.json(data))
     .catch((err) => console.warn(err));
+});
+
+app.delete('/api/journals', (req, res) => {
+  console.log(res);
+  return deleteJournal(req.body)
+    .then((data) => res.send(data))
+    .catch((err) => console.warn(err));
+});
+
+app.put('/api/journals', (req, res) => {
+  return updateJournal(req.body)
+    .then((data) => res.send(data))
+    .catch((err) => console.log(err));
 });
 
 
