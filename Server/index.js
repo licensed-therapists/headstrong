@@ -2,6 +2,11 @@ const path = require('path');
 const express = require('express');
 const { Quotes } = require('./api/quotes');
 const { db, getAllJournals, addJournals, deleteJournal, updateJournal} = require('./db/dbBase.js');
+const { GoogleStrategy } = require('./passport.js');
+const passport = require('passport');
+require('dotenv').config();
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 const port = 3000;
 
@@ -12,6 +17,58 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(dist));
 app.use('/api/quotes', Quotes);
+app.use(passport.initialize());
+app.use(passport.session());
+// used to parse cookies
+app.use(cookieParser());
+
+// line 20 - 40 all used for google login
+app.use(
+  session({
+    secret: process.env.clientSecret,
+    saveUninitialized: false,
+    resave: true,
+  }),
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
+// this is the google login route
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+
+// redirect route for google login
+app.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // user is the key that done passed down and take just the ID
+    // setting cookie key to headstrong and value to user id
+    res.cookie('Headstrong', req.user.id);
+    res.redirect('/');
+  });
+
+
+app.get('/isloggedin', (req, res) => {
+  // check to see if the cookie key is headstrong
+  if (req.cookies.Headstrong) {
+    res.json(true);
+  } else {
+    res.json(false);
+  }
+});
+
+// route to logout
+app.delete('/logout', (req, res) => {
+  // delete the cookie key headstrong
+  res.clearCookie('Headstrong');
+  res.json(false);
+});
 
 
 app.get('/api/journals', (req, res) => {

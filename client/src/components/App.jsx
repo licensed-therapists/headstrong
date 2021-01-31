@@ -12,11 +12,13 @@ class App extends React.Component {
       body: '',
       quoteText: '',
       quoteAuthor: '',
+      login: false
     };
 
     // this.handleSubmit = this.handleSubmit.bind(this);
     this.getRandomQuote = this.getRandomQuote.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
 
@@ -37,17 +39,33 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getRandomQuote();
+    axios.get('/isloggedin')
+      .then(({ data }) =>
+        this.setState({
+          login: data
+        }))
+      .catch((err) => console.warn(err));
+  }
+
+  logout(data) {
+    this.setState({
+      login: data
+    });
   }
 
   render() {
-    const { quoteText, quoteAuthor } = this.state;
+    const { quoteText, quoteAuthor, login } = this.state;
 
     return (
       <div>
-        <Header />
-        <h1>Welcome to HeadStrong!</h1>
-        <Quote quoteText={quoteText} quoteAuthor={quoteAuthor}/>
-        <Entry />
+        {
+          login ?
+            <div>
+              <Header logout={this.logout}/>
+              <h1>Welcome to HeadStrong!</h1>
+              <Quote quoteText={quoteText} quoteAuthor={quoteAuthor}/>
+              <Entry /></div> : <button><a href="/auth/google">Sign In with Google</a></button>
+        }
       </div>
     );
   }
