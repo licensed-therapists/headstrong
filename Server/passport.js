@@ -12,7 +12,8 @@ passport.use(new GoogleStrategy({
   callbackURL: '/auth/google/callback'
 },
 function(token, tokenSecret, profile, done) {
-  console.info(profile);
+  // profile is google profile
+  // done is being passed to the callback url under key user
   done(null, profile);
 
 }

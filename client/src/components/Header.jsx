@@ -1,6 +1,7 @@
 import React from 'react';
-import { AppBar, Toolbar, IconButton, List, ListItem, ListItemText, makeStyles, Container } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, List, ListItem, ListItemText, makeStyles, Container, Button } from '@material-ui/core';
 import { Home } from '@material-ui/icons';
+import axios from 'axios';
 
 // navigation bar styles uses makeStyles which allows us to add CSS styling in JavaScript
 
@@ -12,7 +13,7 @@ const navLinks = [
 ];
 
 //Header function
-const Header = () => {
+const Header = ({ logout }) => {
 
   const navStyles = makeStyles({
     navDisplayFlex: {
@@ -33,6 +34,11 @@ const Header = () => {
         <Container maxWidth="md" className={styles.navbarDisplayFlex}>
           <IconButton edge="start" color="inherit" aria-label="home" className={styles.navDisplayFlex}>
             <Home fontSize="large" />
+            <Button style={{backgroundColor: 'white', marginLeft: '90%'}} onClick={() => {
+              axios.delete('/logout')
+                .then(({ data }) => logout(data))
+                .catch((err) => console.warn(err));
+            }}>Logout</Button>
           </IconButton>
 
           <List component="nav" aria-labelledby="main navigation">
