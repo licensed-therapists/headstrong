@@ -14,21 +14,11 @@ class App extends React.Component {
       quoteAuthor: '',
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
     this.getRandomQuote = this.getRandomQuote.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
   }
 
-  handleSubmit() {
-    const {title, body } = this.state;
-    //need to return axios.post here
-    /*return axios.post('http://localhost:8000/api/articles', {
-      title,
-      body,
-      author,
-    });
-    */
-  }
 
   getRandomQuote() {
     axios.get('/api/quotes')
@@ -38,6 +28,10 @@ class App extends React.Component {
           quoteText: data[randomIndex].text,
           quoteAuthor: data[randomIndex].author
         });
+        const { quoteAuthor } = this.state;
+        if (quoteAuthor === null || quoteAuthor === 'Donald Trump') {
+          this.setState({ quoteAuthor: 'Anonymous' });
+        }
       }).catch((err) => console.error(err));
   }
 

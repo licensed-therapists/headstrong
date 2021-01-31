@@ -9,7 +9,7 @@ CREATE TABLE entries (
   username varchar(25) NOT NULL,
   title varchar(255) NOT NULL,
   blog varchar(1000) NOT NULL,
-  journal_image BLOB NOT NULL,
+  journal_image BLOB,
   time_stamp varchar(100) NOT NULL,
   -- quote varchar(255) NOT NULL,
   -- weather varchar(100) NOT NULL,
