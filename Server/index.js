@@ -2,6 +2,10 @@ const path = require('path');
 const express = require('express');
 const { Quotes } = require('./api/quotes');
 const { db, getAllJournals, addJournals, deleteJournal, updateJournal} = require('./db/dbBase.js');
+const { GoogleStrategy } = require('./passport.js');
+const passport = require('passport');
+require('dotenv').config();
+const session = require('express-session');
 
 const port = 3000;
 
@@ -12,6 +16,33 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(dist));
 app.use('/api/quotes', Quotes);
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(
+  session({
+    secret: process.env.clientSecret,
+    saveUninitialized: false,
+    resave: true,
+  }),
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+
+app.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
 
 
 app.get('/api/journals', (req, res) => {
