@@ -47,9 +47,26 @@ const deleteJournal = (body) => {
   });
 };
 
+const updateJournal = (body) => {
+
+  const { blog, title, username } = body;
+
+  return new Promise((resolve, reject) => {
+    const string = 'UPDATE entries SET title = ?, blog = ? WHERE username = ?';
+    const args = [title, blog, username];
+
+    db.query(string, args, (err, results) => {
+      if (err) { return reject(err); }
+      resolve(results);
+    });
+  });
+
+};
+
 
 module.exports = {
   getAllJournals,
   addJournals,
-  deleteJournal
+  deleteJournal,
+  updateJournal
 };
