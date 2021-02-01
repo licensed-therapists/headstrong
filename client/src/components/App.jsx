@@ -3,6 +3,7 @@ import Entry from './Entry.jsx';
 import Quote from './MotivationalQuote.jsx';
 import Header from './Header.jsx';
 import axios from 'axios';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
