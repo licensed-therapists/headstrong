@@ -21,6 +21,12 @@ class App extends React.Component {
     this.logout = this.logout.bind(this);
   }
 
+  //change views depending on what you click
+  changeView(option) {
+    this.setState({
+      view: option,
+    });
+  }
 
   getRandomQuote() {
     axios.get('/api/quotes')
@@ -54,9 +60,44 @@ class App extends React.Component {
   }
 
   render() {
-    const { quoteText, quoteAuthor, login } = this.state;
+    const { quoteText, quoteAuthor, login, view} = this.state;
 
     return (
+
+    // <div>
+    //   <div className='nav'>
+    //     <span className='logo'>Korean Tutor</span>
+    //     <span
+    //       className={view === 'phrases' ? 'nav-selected' : 'nav-unselected'}
+    //       onClick={() => this.changeView('phrases')}
+    //     >
+    //     Phrase List
+    //     </span>
+    //     <span
+    //       className={view === 'practice' ? 'nav-selected' : 'nav-unselected'}
+    //       onClick={() => this.changeView('practice')}
+    //     >
+    //     Practice
+    //     </span>
+    //   </div>
+
+    //   <div className='main'>
+    //     {view === 'phrases'
+    //       ? <PhraseList
+    //         getPhraseList={this.getPhraseList}
+    //         phrases={phrases}
+    //       />
+    //       : <Practice
+    //         phrase={phrase}
+    //         updatePhraseClick={this.updatePhraseClick}
+    //         translation={translation}
+    //         togglePhrase={this.togglePhrase}
+
+    //       />
+    //     }
+
+    //</div>
+      // </div>
       <div>
         {
           login ?
