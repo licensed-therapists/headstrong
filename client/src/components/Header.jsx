@@ -8,8 +8,8 @@ import axios from 'axios';
 
 //navigation links
 const navLinks = [
-  {title: 'write journal entry', path: '/entry'},
-  {title: 'memories', path: '/memory'}
+  {title: 'write journal entry', path: 'entry'},
+  {title: 'memories', path: 'memory'}
 ];
 
 //Header function

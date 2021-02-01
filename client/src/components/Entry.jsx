@@ -63,6 +63,7 @@ class Entry extends Component {
           </div>
 
           <div>
+            <button className="btn btn-primary float-left">Upload Photo</button>
             <button className="btn btn-primary float-right" onClick={() => this.handleSubmit()}>Submit!</button>
           </div>
 
