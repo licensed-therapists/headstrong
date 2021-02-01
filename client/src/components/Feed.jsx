@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Feed = ({quoteText, quoteAuthor, entries}) => {
+
   return (
     <div>
       <div>

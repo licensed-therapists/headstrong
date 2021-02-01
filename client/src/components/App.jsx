@@ -1,7 +1,7 @@
 import React from 'react';
 import Entry from './Entry.jsx';
-import Quote from './MotivationalQuote.jsx';
-import Header from './Header.jsx';
+import Memory from './Memory.jsx';
+//import Header from './Header.jsx';
 import Feed from './Feed.jsx';
 import axios from 'axios';
 class App extends React.Component {
@@ -14,13 +14,18 @@ class App extends React.Component {
       quoteText: '',
       quoteAuthor: '',
       login: false,
-      view: 'feed'
+      view: 'feed',
+      entries: [],
+      memory: null
     };
 
     // this.handleSubmit = this.handleSubmit.bind(this);
     this.getRandomQuote = this.getRandomQuote.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.logout = this.logout.bind(this);
+    this.getRandomMemory = this.getRandomMemory.bind(this);
+    this.changeView = this.changeView.bind(this);
+    this.renderView = this.renderView.bind(this);
   }
 
   //change views depending on what you click
@@ -45,8 +50,33 @@ class App extends React.Component {
       }).catch((err) => console.error(err));
   }
 
+  getRandomMemory() {
+    axios.get('/api/journals')
+      .then(({ data }) => {
+        const randomIndex = Math.floor(Math.random() * data.length + 1);
+        console.log('LOOK HERE*******', data[randomIndex]);
+        this.setState({
+          memory: data[randomIndex]
+        });
+      }).catch((err) => console.error(err));
+  }
+
+  renderView() {
+    const { view, entries, quoteText, quoteAuthor, memory } = this.state;
+    if (view === 'feed') {
+      return <Feed entries={entries}
+        quoteText={quoteText}
+        quoteAuthor={quoteAuthor}/>;
+    } else if (view === 'entry') {
+      return <Entry />;
+    } else if (view === 'memory') {
+      return <Memory memory={memory} />;
+    }
+  }
   componentDidMount() {
     this.getRandomQuote();
+    this.getRandomMemory();
+    this.renderView();
     axios.get('/isloggedin')
       .then(({ data }) =>
         this.setState({
@@ -70,7 +100,10 @@ class App extends React.Component {
         <div className='nav'>
           <span className='logo'>HeadStrong</span>
           <span
-            className={view === 'feed' ? 'nav-selected' : 'nav-unselected'}
+            className={
+              view === 'feed'
+                ? 'nav-selected'
+                : 'nav-unselected'}
             onClick={() => this.changeView('feed')}
           >
         Home
@@ -90,19 +123,7 @@ class App extends React.Component {
         </div>
 
         <div className='main'>
-          {view === 'feed'
-            ? <PhraseList
-              getPhraseList={this.getPhraseList}
-              phrases={phrases}
-            />
-            : <Practice
-              phrase={phrase}
-              updatePhraseClick={this.updatePhraseClick}
-              translation={translation}
-              togglePhrase={this.togglePhrase}
-
-            />
-          }
+          { this.renderView()}
 
         </div>
       </div>
