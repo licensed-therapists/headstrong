@@ -16,6 +16,7 @@ class Entry extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handlePostChange = this.handlePostChange.bind(this);
+    this.handleImageChange = this.handleImageChange.bind(this);
   }
 
   handleTitleChange(e) {
@@ -24,6 +25,10 @@ class Entry extends Component {
 
   handlePostChange(e) {
     this.setState({ blog: e.target.value });
+  }
+
+  handleImageChange(e) {
+    this.setState({ journalImage: e.target.value });
   }
 
   handleSubmit() {
@@ -63,9 +68,12 @@ class Entry extends Component {
           </div>
 
           <div>
-            <button className="btn btn-primary float-left">Upload Photo</button>
-            <button className="btn btn-primary float-right" onClick={() => this.handleSubmit()}>Submit!</button>
+            <button className="btn btn-primary float-left" onClick={() => this.handleSubmit()}>Submit</button>
+            <input value={ journalImage } placeholder="insert image url" className="btn btn-primary float-right" onChange={(e) => this.handleImageChange(e)}/>
           </div>
+          {
+            journalImage.length ? <img style={{ height: '200px', width: '300px'}} src={ journalImage } /> : null
+          }
 
         </form>
       </div>
