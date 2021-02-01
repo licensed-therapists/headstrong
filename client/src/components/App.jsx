@@ -2,6 +2,7 @@ import React from 'react';
 import Entry from './Entry.jsx';
 import Quote from './MotivationalQuote.jsx';
 import Header from './Header.jsx';
+import Feed from './Feed.jsx';
 import axios from 'axios';
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class App extends React.Component {
       body: '',
       quoteText: '',
       quoteAuthor: '',
-      login: false
+      login: false,
+      view: 'feed'
     };
 
     // this.handleSubmit = this.handleSubmit.bind(this);
@@ -64,50 +66,56 @@ class App extends React.Component {
 
     return (
 
-    // <div>
-    //   <div className='nav'>
-    //     <span className='logo'>Korean Tutor</span>
-    //     <span
-    //       className={view === 'phrases' ? 'nav-selected' : 'nav-unselected'}
-    //       onClick={() => this.changeView('phrases')}
-    //     >
-    //     Phrase List
-    //     </span>
-    //     <span
-    //       className={view === 'practice' ? 'nav-selected' : 'nav-unselected'}
-    //       onClick={() => this.changeView('practice')}
-    //     >
-    //     Practice
-    //     </span>
-    //   </div>
-
-    //   <div className='main'>
-    //     {view === 'phrases'
-    //       ? <PhraseList
-    //         getPhraseList={this.getPhraseList}
-    //         phrases={phrases}
-    //       />
-    //       : <Practice
-    //         phrase={phrase}
-    //         updatePhraseClick={this.updatePhraseClick}
-    //         translation={translation}
-    //         togglePhrase={this.togglePhrase}
-
-    //       />
-    //     }
-
-    //</div>
-      // </div>
       <div>
-        {
-          login ?
-            <div>
-              <Header logout={this.logout}/>
-              <h1>Welcome to HeadStrong!</h1>
-              <Quote quoteText={quoteText} quoteAuthor={quoteAuthor}/>
-              <Entry /></div> : <button><a href="/auth/google">Sign In with Google</a></button>
-        }
+        <div className='nav'>
+          <span className='logo'>HeadStrong</span>
+          <span
+            className={view === 'feed' ? 'nav-selected' : 'nav-unselected'}
+            onClick={() => this.changeView('feed')}
+          >
+        Home
+          </span>
+          <span
+            className={view === 'entry' ? 'nav-selected' : 'nav-unselected'}
+            onClick={() => this.changeView('entry')}
+          >
+        Write Entry
+          </span>
+          <span
+            className={view === 'memory' ? 'nav-selected' : 'nav-unselected'}
+            onClick={() => this.changeView('memory')}
+          >
+        Memory
+          </span>
+        </div>
+
+        <div className='main'>
+          {view === 'feed'
+            ? <PhraseList
+              getPhraseList={this.getPhraseList}
+              phrases={phrases}
+            />
+            : <Practice
+              phrase={phrase}
+              updatePhraseClick={this.updatePhraseClick}
+              translation={translation}
+              togglePhrase={this.togglePhrase}
+
+            />
+          }
+
+        </div>
       </div>
+      // <div>
+      //   {
+      //     login ?
+      //       <div>
+      //         <Header logout={this.logout}/>
+      //         <h1>Welcome to HeadStrong!</h1>
+      //         <Quote quoteText={quoteText} quoteAuthor={quoteAuthor}/>
+      //         <Entry /></div> : <button><a href="/auth/google">Sign In with Google</a></button>
+      //   }
+      // </div>
     );
   }
 
