@@ -3,6 +3,7 @@ import Entry from './Entry.jsx';
 import Quote from './MotivationalQuote.jsx';
 import Header from './Header.jsx';
 import axios from 'axios';
+import GoogleButton from 'react-google-button';
 
 class App extends React.Component {
   constructor(props) {
@@ -52,6 +53,7 @@ class App extends React.Component {
           login: data
         }))
       .catch((err) => console.warn(err));
+
   }
 
   logout(data) {
@@ -106,7 +108,7 @@ class App extends React.Component {
               <Header logout={this.logout}/>
               <h1>Welcome to HeadStrong!</h1>
               <Quote quoteText={quoteText} quoteAuthor={quoteAuthor}/>
-              <Entry /></div> : <button><a href="/auth/google">Sign In with Google</a></button>
+              <Entry /> </div> : <a href="/auth/google"> <GoogleButton /></a>
         }
       </div>
     );
