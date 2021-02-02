@@ -1,14 +1,15 @@
 const path = require('path');
 const express = require('express');
 const { Quotes } = require('./api/quotes');
-const { db, getAllJournals, addJournals, deleteJournal, updateJournal} = require('./db/dbBase.js');
+//const { db, getAllJournals, addJournals, deleteJournal, updateJournal} = require('./db/dbBase.js');
 const { GoogleStrategy } = require('./passport.js');
 const passport = require('passport');
 require('dotenv').config();
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const sql = require('./db/dbBase.js') 
 
-const port = 3000;
+const port = process.env.PORT || 8080;
 
 const dist = path.resolve(__dirname, '..', 'client', 'dist');
 const app = express();
@@ -25,7 +26,7 @@ app.use(cookieParser());
 // line 20 - 40 all used for google login
 app.use(
   session({
-    secret: process.env.clientSecret,
+    secret: 'TOzC2FS4ZzoHKArfTltR0fP7',
     saveUninitialized: false,
     resave: true,
   }),
@@ -71,30 +72,30 @@ app.delete('/logout', (req, res) => {
 });
 
 
-app.get('/api/journals', (req, res) => {
-  return getAllJournals()
-    .then((data) => res.json(data))
-    .catch((err) => console.warn(err));
-});
+// app.get('/api/journals', (req, res) => {
+//   return getAllJournals()
+//     .then((data) => res.json(data))
+//     .catch((err) => console.warn(err));
+// });
 
-app.post('/api/journals', (req, res) => {
-  return addJournals(req.body)
-    .then((data) => res.json(data))
-    .catch((err) => console.warn(err));
-});
+// app.post('/api/journals', (req, res) => {
+//   return addJournals(req.body)
+//     .then((data) => res.json(data))
+//     .catch((err) => console.warn(err));
+// });
 
-app.delete('/api/journals', (req, res) => {
-  console.log(res);
-  return deleteJournal(req.body)
-    .then((data) => res.send(data))
-    .catch((err) => console.warn(err));
-});
+// app.delete('/api/journals', (req, res) => {
+//   console.log(res);
+//   return deleteJournal(req.body)
+//     .then((data) => res.send(data))
+//     .catch((err) => console.warn(err));
+// });
 
-app.put('/api/journals', (req, res) => {
-  return updateJournal(req.body)
-    .then((data) => res.send(data))
-    .catch((err) => console.log(err));
-});
+// app.put('/api/journals', (req, res) => {
+//   return updateJournal(req.body)
+//     .then((data) => res.send(data))
+//     .catch((err) => console.log(err));
+// });
 
 
 
