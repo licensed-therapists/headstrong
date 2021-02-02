@@ -78,7 +78,6 @@ class Entry extends Component {
         </form>
       </div>
     );
-
   }
 }
 
