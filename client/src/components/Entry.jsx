@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import GoogleButton from 'react-google-button';
 class Entry extends Component {
   constructor(props) {
     super(props);
