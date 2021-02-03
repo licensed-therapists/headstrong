@@ -1,8 +1,9 @@
 const path = require('path');
 const express = require('express');
 const { Quotes } = require('./api/quotes');
+const { db, getAllJournals, addJournals, deleteJournal, updateJournal} = require('./db/dbBase.js');
 const { Weather } = require('./api/weather');
-//const { db, getAllJournals, addJournals, deleteJournal, updateJournal} = require('./db/dbBase.js');
+
 const { GoogleStrategy } = require('./passport.js');
 const passport = require('passport');
 require('dotenv').config();
@@ -74,24 +75,24 @@ app.delete('/logout', (req, res) => {
 });
 
 
-// app.get('/api/journals', (req, res) => {
-//   return getAllJournals()
-//     .then((data) => res.json(data))
-//     .catch((err) => console.warn(err));
-// });
+app.get('/api/journals', (req, res) => {
+  return getAllJournals()
+    .then((data) => res.json(data))
+    .catch((err) => console.warn(err));
+});
 
-// app.post('/api/journals', (req, res) => {
-//   return addJournals(req.body)
-//     .then((data) => res.json(data))
-//     .catch((err) => console.warn(err));
-// });
+app.post('/api/journals', (req, res) => {
+  return addJournals(req.body)
+    .then((data) => res.json(data))
+    .catch((err) => console.warn(err));
+});
 
-// app.delete('/api/journals', (req, res) => {
-//   console.log(res);
-//   return deleteJournal(req.body)
-//     .then((data) => res.send(data))
-//     .catch((err) => console.warn(err));
-// });
+app.delete('/api/journals', (req, res) => {
+  console.log(res);
+  return deleteJournal(req.body)
+    .then((data) => res.send(data))
+    .catch((err) => console.warn(err));
+});
 
 // app.put('/api/journals', (req, res) => {
 //   return updateJournal(req.body)
