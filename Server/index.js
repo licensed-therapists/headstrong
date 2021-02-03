@@ -19,11 +19,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(dist));
 app.use('/api/quotes', Quotes);
-app.use('/api/weather', Weather);
 app.use(passport.initialize());
 app.use(passport.session());
 // used to parse cookies
-app.use(cookieParser('TOzC2FS4ZzoHKArfTltR0fP7'));
+app.use(cookieParser());
 
 // line 20 - 40 all used for google login
 app.use(
