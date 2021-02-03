@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import GoogleButton from 'react-google-button';
 class Entry extends Component {
   constructor(props) {
     super(props);
@@ -86,7 +86,7 @@ class Entry extends Component {
       username: username,
       title: title,
       blog: blog,
-      journal_image: journalImage,
+      journalImage: journalImage,
       temp: temp,
       weatherIcon: weatherIcon,
       weatherDescription: weatherDescription
@@ -119,8 +119,8 @@ class Entry extends Component {
           </div>
 
           <div>
+            <input value={ journalImage } placeholder="insert image url" className="btn btn-primary float-right" onChange={this.handleImageChange}/>
             <button className="btn btn-primary float-left" onClick={() => this.handleSubmit()}>Submit</button>
-            <input value={ journalImage } placeholder="insert image url" className="btn btn-primary float-right" onChange={(e) => this.handleImageChange(e)}/>
           </div>
           {
             journalImage.length ? <img style={{ height: '200px', width: '300px'}} src={ journalImage } /> : null
