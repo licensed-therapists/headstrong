@@ -7,7 +7,7 @@ const passport = require('passport');
 require('dotenv').config();
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const sql = require('./db/dbBase.js') 
+const sql = require('./db/dbBase.js'); 
 
 const port = process.env.PORT || 8080;
 
@@ -21,12 +21,12 @@ app.use('/api/quotes', Quotes);
 app.use(passport.initialize());
 app.use(passport.session());
 // used to parse cookies
-app.use(cookieParser());
+app.use(cookieParser('TOzC2FS4ZzoHKArfTltR0fP7'));
 
 // line 20 - 40 all used for google login
 app.use(
   session({
-    secret: 'TOzC2FS4ZzoHKArfTltR0fP7',
+    secret: process.env.clientSecret,
     saveUninitialized: false,
     resave: true,
   }),
