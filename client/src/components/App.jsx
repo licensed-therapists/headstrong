@@ -70,9 +70,9 @@ class App extends Component {
         quoteText={quoteText}
         quoteAuthor={quoteAuthor}/>;
     } else if (view === 'entry') {
-      return <Entry />;
+      return <Entry logout={this.logout}/>;
     } else if (view === 'memory') {
-      return <Memory memory={memory} />;
+      return <Memory logout={this.logout} memory={memory} />;
     }
   }
   componentDidMount() {
@@ -88,55 +88,58 @@ class App extends Component {
 
   }
 
-  logout(data) {
+  logout(bool) {
     this.setState({
-      login: data
+      login: bool
     });
   }
 
   render() {
-    const { quoteText, quoteAuthor, login, view} = this.state;
+    const { login, view } = this.state;
 
     return (
-
       <div>
-        <div className='nav'>
-          <span className='logo'>HeadStrong</span>
-          <span
-            className={
-              view === 'feed'
-                ? 'nav-selected'
-                : 'nav-unselected'}
-            onClick={() => this.changeView('feed')}
-          >
-        Home
-          </span>
-          <span
-            className={view === 'entry' ? 'nav-selected' : 'nav-unselected'}
-            onClick={() => this.changeView('entry')}
-          >
-        Write Entry
-          </span>
-          <span
-            className={view === 'memory' ? 'nav-selected' : 'nav-unselected'}
-            onClick={() => this.changeView('memory')}
-          >
-        Memory
-          </span>
-        </div>
+        <div className='logo'>HeadStrong</div>
+        {
+          !login
+            ? <div>
 
-        <div className='main'>
-          { this.renderView()}
-
-        </div>
-        {/* {
-          login ?
+              <a href="/auth/google"> <GoogleButton /></a>
+            </div>
+            :
             <div>
-              <Header logout={this.logout}/>
-              <h1>Welcome to HeadStrong!</h1>
-              <Quote quoteText={quoteText} quoteAuthor={quoteAuthor}/>
-              <Entry /> </div> : <a href="/auth/google"> <GoogleButton /></a>
-        } */}
+              <div>
+                <div className='nav'>
+                  <span
+                    className={
+                      view === 'feed'
+                        ? 'nav-selected'
+                        : 'nav-unselected'}
+                    onClick={() => this.changeView('feed')}
+                  >
+        Home
+                  </span>
+                  <span
+                    className={view === 'entry' ? 'nav-selected' : 'nav-unselected'}
+                    onClick={() => this.changeView('entry')}
+                  >
+        Write Entry
+                  </span>
+                  <span
+                    className={view === 'memory' ? 'nav-selected' : 'nav-unselected'}
+                    onClick={() => this.changeView('memory')}
+                  >
+        Memory
+                  </span>
+                </div>
+
+                <div className='main'>
+                  { this.renderView()}
+
+                </div>
+              </div>
+            </div>
+        }
       </div>
     );
   }
