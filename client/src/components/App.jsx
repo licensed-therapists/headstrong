@@ -18,7 +18,9 @@ class App extends React.Component {
       login: false,
       view: 'feed',
       entries: [],
-      memory: null
+      memory: null,
+      latitude: '',
+      longitude: ''
     };
 
     // this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,6 +30,22 @@ class App extends React.Component {
     this.getRandomMemory = this.getRandomMemory.bind(this);
     this.changeView = this.changeView.bind(this);
     this.renderView = this.renderView.bind(this);
+  }
+
+  // get user's geolocation for weather
+  getWeatherByUserLocation() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.setState({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      });
+    })
+      .then(axios.get('/api/weather', {
+        latitude: this.state.latitude,
+        longitude: this.state.longitude
+      }))
+      .then(({ data }) => console.log(data))
+      .catch((err) => console.error(err));
   }
 
   //change views depending on what you click
