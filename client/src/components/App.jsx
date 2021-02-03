@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Entry from './Entry.jsx';
 import Memory from './Memory.jsx';
 //import Header from './Header.jsx';
@@ -6,7 +6,7 @@ import Feed from './Feed.jsx';
 import axios from 'axios';
 import GoogleButton from 'react-google-button';
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
 
@@ -18,7 +18,7 @@ class App extends React.Component {
       login: false,
       view: 'feed',
       entries: [],
-      memory: null
+      memory: null,
     };
 
     // this.handleSubmit = this.handleSubmit.bind(this);
@@ -46,7 +46,7 @@ class App extends React.Component {
           quoteAuthor: data[randomIndex].author
         });
         const { quoteAuthor } = this.state;
-        if (quoteAuthor === null || quoteAuthor === 'Donald Trump') {
+        if (quoteAuthor === null) {
           this.setState({ quoteAuthor: 'Anonymous' });
         }
       }).catch((err) => console.error(err));
@@ -56,7 +56,7 @@ class App extends React.Component {
     axios.get('/api/journals')
       .then(({ data }) => {
         const randomIndex = Math.floor(Math.random() * data.length + 1);
-        console.log('LOOK HERE*******', data[randomIndex]);
+        // console.log('LOOK HERE*******', data[randomIndex]);
         this.setState({
           memory: data[randomIndex]
         });
