@@ -52,11 +52,33 @@ sequelize.authenticate()
   .catch((err) => console.warn(err));
 
 const getAllJournals = () =>
-  sequelize.query('SELECT * FROM entries', { type: QueryTypes.SELECT })
+  // sequelize.query('SELECT * FROM entries', { type: QueryTypes.SELECT })
+  Entries.findAll()
     .then((data) => console.log(data))
     .catch((err) => console.warn(err));
 
-getAllJournals();
+const deleteJournal = (body) => {
+  const { title } = body;
+  const args = [title];
+  sequelize.query('DELETE FROM entries WHERE title = ?', args, { type: QueryTypes.DELETE})
+    .then((data) => console.info(data))
+    .catch((err) => console.warn(err));
+};
+
+
+const addJournals = (body) => {
+  const { username, title, blog, journalImage, timeStamp } = body;
+  return Entries.create({
+    username: username,
+    title: title,
+    blog: blog,
+    journalImage: journalImage,
+    timeStamp: timeStamp
+  })
+    .then((data) => console.log(data))
+    .catch((err) => console.warn(err));
+
+};
 
 // const db = mysql.createConnection({
 //   host: 'localhost',
@@ -121,12 +143,10 @@ getAllJournals();
 // };
 
 
-// module.exports = {
-//   getAllJournals,
-//   addJournals,
-//   deleteJournal,
-//   updateJournal
-// };
-
-
-module.exports = Entries;
+module.exports = {
+  getAllJournals,
+  addJournals,
+  deleteJournal,
+  // updateJournal
+  Entries
+};
