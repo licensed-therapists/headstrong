@@ -30,6 +30,7 @@ class App extends React.Component {
     this.getRandomMemory = this.getRandomMemory.bind(this);
     this.changeView = this.changeView.bind(this);
     this.renderView = this.renderView.bind(this);
+    this.getWeatherByUserLocation = this.getWeatherByUserLocation.bind(this);
   }
 
   // get user's geolocation for weather

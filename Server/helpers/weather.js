@@ -1,7 +1,7 @@
 const axios = require('axios');
 const config = require('../config');
 
-const getForecastByGeolocation = (latitude, longitude) => {
+const getWeatherByGeolocation = (latitude, longitude) => {
 
   const url = `http://api.weatherbit.io/v2.0/current?&lat=${latitude}&lon=${longitude}&key=${config.WEATHERBIT_TOKEN}`;
 
@@ -10,5 +10,5 @@ const getForecastByGeolocation = (latitude, longitude) => {
 };
 
 module.exports = {
-  getForecastByGeolocation
+  getWeatherByGeolocation
 };
