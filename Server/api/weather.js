@@ -2,7 +2,7 @@ const { Router } = require('express');
 const Weather = Router();
 const { getWeatherByGeolocation } = require('../helpers/weather');
 
-Weather.get('/', (req, res) => {
+Weather.post('/', (req, res) => {
   const { latitude, longitude } = req.body;
 
   getWeatherByGeolocation(latitude, longitude)

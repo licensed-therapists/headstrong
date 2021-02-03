@@ -45,7 +45,7 @@ class Entry extends Component {
   getWeatherByUserLocation() {
     // this._isMounted = true;
 
-    axios.get('/api/weather', {
+    axios.post('/api/weather', {
       latitude: this.state.latitude,
       longitude: this.state.longitude
     })
@@ -81,13 +81,15 @@ class Entry extends Component {
   }
 
   handleSubmit() {
-    const { username, title, blog, journalImage } = this.state;
+    const { username, title, blog, journalImage, temp, weatherIcon, weatherDescription } = this.state;
     axios.post('/api/journals', {
       username: username,
       title: title,
       blog: blog,
       journal_image: journalImage,
-      time_stamp: new Date()
+      temp: temp,
+      weatherIcon: weatherIcon,
+      weatherDescription: weatherDescription
     })
       .then((data) => console.log(data))
       .catch((err) => console.log(err));
