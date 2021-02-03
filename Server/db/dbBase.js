@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 const { QueryTypes } = require('sequelize');
 
-const sequelize = new Sequelize('bvovqz5i8vupyakcyuc6', 'uupjrbhdknay1bef', '0z5Qosz43DymuacWxtB5', {
-  host: 'bvovqz5i8vupyakcyuc6-mysql.services.clever-cloud.com',
+const sequelize = new Sequelize('b7i6rsjwzlwsyfz7le7a', 'uwpqitz9sxjsbq9y', '4sCvHnhBpmu3CXRg3rFD', {
+  host: 'b7i6rsjwzlwsyfz7le7a-mysql.services.clever-cloud.com',
   dialect: 'mysql',
 
 });
@@ -56,13 +56,12 @@ sequelize.sync({force: true})
 //   .then(() => console.info('Connected to the Database'))
 //   .catch((err) => console.warn(err));
 
-const getAllJournals = () =>
-  // sequelize.query('SELECT * FROM entries', { type: QueryTypes.SELECT })
-  Entries.findAll({
-    include: [username]
-  })
-    .then((data) => console.log(data))
-    .catch((err) => console.warn(err));
+const getAllJournals = () => {
+  return Entries.findAll();
+};
+// sequelize.query('SELECT * FROM entries', { type: QueryTypes.SELECT })
+
+
 
 const deleteJournal = (body) => {
   const { title } = body;
@@ -73,18 +72,17 @@ const deleteJournal = (body) => {
 };
 
 
-const addJournals = (body) => {
+const addJournals = async(body) => {
   const { username, title, blog, journalImage, timeStamp } = body;
-  return Entries.create({
+  const newEntry = await Entries.create({
     username: username,
     title: title,
     blog: blog,
     journalImage: journalImage,
     // timeStamp: timeStamp
-  })
-    .then((data) => console.log(data))
-    .catch((err) => console.warn(err));
+  });
 
+  return newEntry.save();
 };
 
 // const db = mysql.createConnection({
