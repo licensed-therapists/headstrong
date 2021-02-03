@@ -63,12 +63,24 @@ const getAllJournals = () => {
 
 
 
+// const deleteJournal = (body) => {
+//   const { title } = body;
+//   const args = [title];
+//   sequelize.query('DELETE FROM entries WHERE title = ?', args, { type: QueryTypes.DELETE})
+//     .then((data) => console.info(data))
+//     .catch((err) => console.warn(err));
+
 const deleteJournal = (body) => {
-  const { title } = body;
-  const args = [title];
-  sequelize.query('DELETE FROM entries WHERE title = ?', args, { type: QueryTypes.DELETE})
-    .then((data) => console.info(data))
-    .catch((err) => console.warn(err));
+  const { id } = body;
+  return Entries.destroy({
+    where: {
+      id: id
+    }
+  });
+  // const args = [title];
+  // sequelize.query('DELETE FROM entries WHERE title = ?', args, { type: QueryTypes.DELETE})
+  //   .then((data) => console.info(data))
+  //   .catch((err) => console.warn(err));
 };
 
 
@@ -85,51 +97,22 @@ const addJournals = async(body) => {
   return newEntry.save();
 };
 
-// const db = mysql.createConnection({
-//   host: 'localhost',
-//   user: 'root',
-//   password: '',
-//   database: 'journals'
-// });
+const updateJournal = (body) => {
+  const { username, title, blog, id } = body;
+  //first object is what you want to change
+  return Entries.update({
+    username: username,
+    blog: blog,
+    title: title
+  },
+  {
+    where: {
+      id: id
+    }
+  });
 
+};
 
-// const getAllJournals = () => {
-//   return new Promise((resolve, reject) => {
-//     db.query('SELECT * FROM entries', (err, results) => {
-//       if (err) { return reject(err); }
-//       resolve(results);
-//     });
-//   });
-// };
-
-// const addJournals = (body) => {
-//   // eslint-disable-next-line camelcase
-//   const { username, title, blog, journal_image, time_stamp } = body;
-
-//   return new Promise((resolve, reject) => {
-//     const string = 'INSERT into entries (username, title, blog, journal_image, time_stamp) VALUES (?, ?, ?, ?, ?)';
-//     const args = [username, title, blog, journal_image, time_stamp];
-//     db.query(string, args, (err, results) => {
-//       if (err) { return reject(err); }
-//       resolve(results);
-//     });
-//   });
-// };
-
-// const deleteJournal = (body) => {
-//   console.log(body);
-
-//   const { title } = body;
-//   return new Promise((resolve, reject) => {
-//     const string = 'DELETE FROM entries WHERE title = ?';
-//     const args = [title];
-
-//     db.query(string, args, (err, results) => {
-//       if (err) { return reject(err); }
-//       resolve(results);
-//     });
-//   });
-// };
 
 // const updateJournal = (body) => {
 
@@ -145,13 +128,12 @@ const addJournals = async(body) => {
 //     });
 //   });
 
-// };
 
 
 module.exports = {
   getAllJournals,
   addJournals,
   deleteJournal,
-  // updateJournal
+  updateJournal,
   Entries
 };
