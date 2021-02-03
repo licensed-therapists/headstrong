@@ -86,8 +86,7 @@ class Entry extends Component {
       username: username,
       title: title,
       blog: blog,
-      journal_image: journalImage,
-      time_stamp: new Date()
+      journalImage: journalImage,
     })
       .then((data) => console.log(data))
       .catch((err) => console.log(err));
@@ -117,7 +116,7 @@ class Entry extends Component {
           </div>
 
           <div>
-            <input value={ journalImage } placeholder="insert image url" className="btn btn-primary float-right" onChange={(e) => this.handleImageChange(e)}/>
+            <input value={ journalImage } placeholder="insert image url" className="btn btn-primary float-right" onChange={this.handleImageChange}/>
             <button className="btn btn-primary float-left" onClick={() => this.handleSubmit()}>Submit</button>
           </div>
           {
