@@ -80,9 +80,9 @@ class App extends Component {
     this.getRandomMemory();
     this.renderView();
     axios.get('/isloggedin')
-      .then(({ bool }) =>
+      .then(({ data }) =>
         this.setState({
-          login: bool
+          login: data
         }))
       .catch((err) => console.warn(err));
 
