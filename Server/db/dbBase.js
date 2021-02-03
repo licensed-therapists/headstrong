@@ -1,11 +1,16 @@
 const Sequelize = require('sequelize');
 const { QueryTypes } = require('sequelize');
 
-const sequelize = new Sequelize('bt1fnvzakotwnpnehern', 'uupjrbhdknay1bef', '0z5Qosz43DymuacWxtB5', {
-  host: 'bt1fnvzakotwnpnehern-mysql.services.clever-cloud.com',
+const sequelize = new Sequelize('bvovqz5i8vupyakcyuc6', 'uupjrbhdknay1bef', '0z5Qosz43DymuacWxtB5', {
+  host: 'bvovqz5i8vupyakcyuc6-mysql.services.clever-cloud.com',
   dialect: 'mysql',
 
 });
+
+sequelize.authenticate()
+  .then(() => console.info('Connected to the Database'))
+  .catch((err) => console.warn(err));
+
 
 const Entries = sequelize.define('entries', {
 
@@ -35,10 +40,10 @@ const Entries = sequelize.define('entries', {
     type: Sequelize.STRING(1000)
   },
 
-  timeStamp: {
-    type: Sequelize.DATE,
-    defaultValue: Sequelize.NOW
-  }
+  // timeStamp: {
+  //   type: Sequelize.DATE,
+  //   defaultValue: Sequelize.NOW
+  // }
 
 });
 
@@ -47,13 +52,15 @@ sequelize.sync({force: true})
   .then(() => console.log('Database and Entries table created'))
   .catch((err) => console.warn(err));
 
-sequelize.authenticate()
-  .then(() => console.info('Connected to the Database'))
-  .catch((err) => console.warn(err));
+// sequelize.authenticate()
+//   .then(() => console.info('Connected to the Database'))
+//   .catch((err) => console.warn(err));
 
 const getAllJournals = () =>
   // sequelize.query('SELECT * FROM entries', { type: QueryTypes.SELECT })
-  Entries.findAll()
+  Entries.findAll({
+    include: [username]
+  })
     .then((data) => console.log(data))
     .catch((err) => console.warn(err));
 
@@ -73,7 +80,7 @@ const addJournals = (body) => {
     title: title,
     blog: blog,
     journalImage: journalImage,
-    timeStamp: timeStamp
+    // timeStamp: timeStamp
   })
     .then((data) => console.log(data))
     .catch((err) => console.warn(err));
