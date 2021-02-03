@@ -1,5 +1,62 @@
-// /* eslint-disable camelcase */
-// const mysql = require('mysql2');
+const Sequelize = require('sequelize');
+const { QueryTypes } = require('sequelize');
+
+const sequelize = new Sequelize('bt1fnvzakotwnpnehern', 'uupjrbhdknay1bef', '0z5Qosz43DymuacWxtB5', {
+  host: 'bt1fnvzakotwnpnehern-mysql.services.clever-cloud.com',
+  dialect: 'mysql',
+
+});
+
+const Entries = sequelize.define('entries', {
+
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
+  },
+
+  username: {
+    type: Sequelize.STRING(50),
+    allowNull: false
+  },
+
+  title: {
+    type: Sequelize.STRING(100),
+    allowNull: false
+  },
+
+  blog: {
+    type: Sequelize.STRING(1000),
+    allowNull: false
+  },
+
+  journalImage: {
+    type: Sequelize.STRING(1000)
+  },
+
+  timeStamp: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.NOW
+  }
+
+});
+
+
+sequelize.sync({force: true})
+  .then(() => console.log('Database and Entries table created'))
+  .catch((err) => console.warn(err));
+
+sequelize.authenticate()
+  .then(() => console.info('Connected to the Database'))
+  .catch((err) => console.warn(err));
+
+const getAllJournals = () =>
+  sequelize.query('SELECT * FROM entries', { type: QueryTypes.SELECT })
+    .then((data) => console.log(data))
+    .catch((err) => console.warn(err));
+
+getAllJournals();
 
 // const db = mysql.createConnection({
 //   host: 'localhost',
@@ -72,18 +129,4 @@
 // };
 
 
-
-const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize('bt1fnvzakotwnpnehern', 'uupjrbhdknay1bef', '0z5Qosz43DymuacWxtB5', {
-    host: 'bt1fnvzakotwnpnehern-mysql.services.clever-cloud.com',
-    dialect: 'mysql',
-
-});
-
-sequelize.authenticate()
-.then(() => console.info('Connected to the Database'))
-.catch((err) => console.warn(err));
-
-
-
-module.export = sequelize;
+module.exports = Entries;
