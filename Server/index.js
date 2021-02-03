@@ -73,17 +73,17 @@ app.delete('/logout', (req, res) => {
 });
 
 
-// app.get('/api/journals', (req, res) => {
-//   return getAllJournals()
-//     .then((data) => res.json(data))
-//     .catch((err) => console.warn(err));
-// });
+app.get('/api/journals', (req, res) => {
+  return getAllJournals()
+    .then((data) => res.json(data))
+    .catch((err) => console.warn(err));
+});
 
-// app.post('/api/journals', (req, res) => {
-//   return addJournals(req.body)
-//     .then((data) => res.json(data))
-//     .catch((err) => console.warn(err));
-// });
+app.post('/api/journals', (req, res) => {
+  return addJournals(req.body)
+    .then((data) => res.json(data))
+    .catch((err) => console.warn(err));
+});
 
 app.delete('/api/journals', (req, res) => {
   // console.log(res);
