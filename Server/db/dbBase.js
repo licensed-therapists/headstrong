@@ -48,9 +48,9 @@ const Entries = sequelize.define('entries', {
 });
 
 
-sequelize.sync({force: true})
-  .then(() => console.log('Database and Entries table created'))
-  .catch((err) => console.warn(err));
+// sequelize.sync({force: true})
+//   .then(() => console.log('Database and Entries table created'))
+//   .catch((err) => console.warn(err));
 
 // sequelize.authenticate()
 //   .then(() => console.info('Connected to the Database'))
