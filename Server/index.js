@@ -8,7 +8,7 @@ const passport = require('passport');
 require('dotenv').config();
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const sql = require('./db/dbBase.js');
+const sequelize = require('./db/dbBase.js');
 
 const port = process.env.PORT || 8080;
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Entry from './Entry.jsx';
 import Memory from './Memory.jsx';
 //import Header from './Header.jsx';
@@ -6,7 +6,7 @@ import Feed from './Feed.jsx';
 import axios from 'axios';
 import GoogleButton from 'react-google-button';
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
 
@@ -19,8 +19,6 @@ class App extends React.Component {
       view: 'feed',
       entries: [],
       memory: null,
-      latitude: '',
-      longitude: ''
     };
 
     // this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,23 +28,6 @@ class App extends React.Component {
     this.getRandomMemory = this.getRandomMemory.bind(this);
     this.changeView = this.changeView.bind(this);
     this.renderView = this.renderView.bind(this);
-    this.getWeatherByUserLocation = this.getWeatherByUserLocation.bind(this);
-  }
-
-  // get user's geolocation for weather
-  getWeatherByUserLocation() {
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.setState({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude
-      });
-    })
-      .then(axios.get('/api/weather', {
-        latitude: this.state.latitude,
-        longitude: this.state.longitude
-      }))
-      .then(({ data }) => console.log(data))
-      .catch((err) => console.error(err));
   }
 
   //change views depending on what you click
@@ -65,7 +46,7 @@ class App extends React.Component {
           quoteAuthor: data[randomIndex].author
         });
         const { quoteAuthor } = this.state;
-        if (quoteAuthor === null || quoteAuthor === 'Donald Trump') {
+        if (quoteAuthor === null) {
           this.setState({ quoteAuthor: 'Anonymous' });
         }
       }).catch((err) => console.error(err));
@@ -75,7 +56,7 @@ class App extends React.Component {
     axios.get('/api/journals')
       .then(({ data }) => {
         const randomIndex = Math.floor(Math.random() * data.length + 1);
-        console.log('LOOK HERE*******', data[randomIndex]);
+        // console.log('LOOK HERE*******', data[randomIndex]);
         this.setState({
           memory: data[randomIndex]
         });
