@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const { Quotes } = require('./api/quotes');
+const { Weather } = require('./api/weather');
 //const { db, getAllJournals, addJournals, deleteJournal, updateJournal} = require('./db/dbBase.js');
 const { GoogleStrategy } = require('./passport.js');
 const passport = require('passport');
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(dist));
 app.use('/api/quotes', Quotes);
+app.use('/api/weather', Weather);
 app.use(passport.initialize());
 app.use(passport.session());
 // used to parse cookies

@@ -5,18 +5,67 @@ import axios from 'axios';
 class Entry extends Component {
   constructor(props) {
     super(props);
-    // const {title, blog, journalImage} = this.props;
+
+    // let _isMounted = false;
 
     this.state = {
       username: '',
       title: '',
       blog: '',
       journalImage: '',
+      latitude: 0,
+      longitude: 0,
+      temp: '',
+      weatherIcon: '',
+      weatherDescription: '',
+
     };
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handlePostChange = this.handlePostChange.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
+    this.getWeatherByUserLocation = this.getWeatherByUserLocation.bind(this);
+    this.getUserLocation = this.getUserLocation.bind(this);
+  }
+
+  // get user's geolocation for weather
+  getUserLocation() {
+    navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
+      // console.log('Latitude is : ', latitude);
+      // console.log('Longitude is : ', longitude);
+      this.setState({
+        latitude: latitude,
+        longitude: longitude
+      });
+    });
+  }
+
+  // get weather using geolocation
+  getWeatherByUserLocation() {
+    // this._isMounted = true;
+
+    axios.get('/api/weather', {
+      latitude: this.state.latitude,
+      longitude: this.state.longitude
+    })
+      .then(({ data: { temp, weather } }) => {
+        // this._isMounted = false;
+        const { icon, description } = weather;
+        // change temperature to fahrenheit
+        temp = Math.round(temp * (9 / 5) + 32);
+        this.setState({
+          temp: `${temp}°F`,
+          weatherIcon: icon,
+          weatherDescription: description
+        });
+      })
+      .catch((err) => console.error(err));
+  }
+
+  componentDidMount() {
+    this.getUserLocation();
+    this.getWeatherByUserLocation();
   }
 
   handleTitleChange(e) {
