@@ -68,8 +68,8 @@ class Entry extends Component {
           </div>
 
           <div>
-            <button className="btn btn-primary float-left" onClick={() => this.handleSubmit()}>Submit</button>
             <input value={ journalImage } placeholder="insert image url" className="btn btn-primary float-right" onChange={(e) => this.handleImageChange(e)}/>
+            <button className="btn btn-primary float-left" onClick={() => this.handleSubmit()}>Submit</button>
           </div>
           {
             journalImage.length ? <img style={{ height: '200px', width: '300px'}} src={ journalImage } /> : null
