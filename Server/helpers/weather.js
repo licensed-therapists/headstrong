@@ -17,7 +17,7 @@ const getWeatherByZipCode = (zipOrCity) => {
 
   let prefix = !isNaN(Number(zipOrCity)) ? 'postal_code' : 'city';
 
-  const url = `http://api.weatherbit.io/v2.0/current?${prefix}=${zipOrCity}&key=${config.WEATHERBIT_TOKEN}`;
+  const url = `http://api.weatherbit.io/v2.0/current?${prefix}=${zipOrCity}&key=f4a62f25fdd94f3cb2aea6f4b892ae10`;
 
   return axios.get(url)
     .then(({ data }) => data);
