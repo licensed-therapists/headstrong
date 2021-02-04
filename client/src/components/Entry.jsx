@@ -16,8 +16,7 @@ class Entry extends Component {
       latitude: 0,
       longitude: 0,
       temp: '',
-      weatherDescription: '',
-      zipOrCity: ''
+      weatherDescription: ''
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,26 +28,26 @@ class Entry extends Component {
     this.getUserLocation = this.getUserLocation.bind(this);
   }
 
-  // get user's geolocation for weather
+  // get user's location by ip address
   getUserLocation() {
-    navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
-      // console.log('Latitude is : ', latitude);
-      // console.log('Longitude is : ', longitude);
-      this.setState({
-        latitude: latitude,
-        longitude: longitude
-      });
-    });
+    //get user's ip address
+    return axios.get('https://api.ipify.org')
+    // get location data by ip address
+      .then(({ data }) => axios.post('/api/location', { ip: data }))
+      .then(({ data: { latitude, longitude } }) => {
+        this.setState({
+          latitude: latitude,
+          longitude: longitude
+        });
+        this.getWeatherByUserLocation(latitude, longitude);
+      })
+      .catch((err) => console.warn(err));
   }
 
   // get weather using geolocation
-  getWeatherByUserLocation() {
+  getWeatherByUserLocation(latitude, longitude) {
     this._isMounted = true;
-    const { latitude, longitude } = this.state;
-    axios.post('/api/weather', {
-      latitude,
-      longitude
-    })
+    axios.post('/api/weather', { latitude, longitude })
       .then(({ data: { data } }) => {
         this._isMounted = false;
         const { temp, weather } = data[0];
@@ -64,25 +63,8 @@ class Entry extends Component {
       .catch((err) => console.warn(err));
   }
 
-  getWeatherByUserInput(zipOrCity) {
-    axios.post('/api/weather', { zipOrCity })
-      .then(({ data: data }) => {
-        const { temp, weather } = data[0];
-        const { description } = weather;
-        const descriptionLowerCase = description.toLowerCase();
-        // change temperature to fahrenheit
-        let newTemp = Math.round(temp * (9 / 5) + 32);
-        this.setState({
-          temp: `${newTemp}°F`,
-          weatherDescription: descriptionLowerCase
-        });
-      })
-      .catch((err) => console.warn(err));
-  }
-
   componentDidMount() {
     this.getUserLocation();
-    this.getWeatherByUserLocation();
   }
 
   handleTitleChange(e) {
@@ -112,15 +94,15 @@ class Entry extends Component {
   }
 
   render() {
-    const { username, title, blog, journalImage, temp, weatherDescription, latitude, longitude } = this.state;
-    const weatherDescLowerCase = weatherDescription.toLowerCase();
+
+    const { username, title, blog, journalImage, temp, weatherDescription } = this.state;
+
     return (
 
       <div className="text">
 
         <form>
           <div className="weather">Currently {temp} and {weatherDescription}</div>
-          {/* <input value={zipOrCity} placeholder="insert your zip code or city" onChange={this.getWeatherByUserInput}/>) */}
           <div>
             <input className="form-control"
               placeholder="Journal Entry Title"
