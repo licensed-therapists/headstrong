@@ -30,21 +30,42 @@ class Entry extends Component {
   }
 
   // get user's geolocation for weather
+  // getUserLocation() {
+  //   navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
+  //     // console.log('Latitude is : ', latitude);
+  //     // console.log('Longitude is : ', longitude);
+  //     this.setState({
+  //       latitude: latitude,
+  //       longitude: longitude
+  //     });
+  //   });
+  // }
   getUserLocation() {
-    navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
-      // console.log('Latitude is : ', latitude);
-      // console.log('Longitude is : ', longitude);
-      this.setState({
-        latitude: latitude,
-        longitude: longitude
-      });
-    });
+    //get user's ip address
+    return axios.get('https://api.ipify.org')
+    // get location data by ip address
+      .then(({ data }) => {
+        console.log('userdatadata', data);
+        return axios.post('/api/location', { ip: data });
+        // console.log('this ip', data);
+      })
+      // .then((data) => console.log('moredata', data))
+      .then(({ data: { latitude, longitude } }) => {
+        this.setState({
+          latitude: latitude,
+          longitude: longitude
+        });
+        console.log(latitude, longitude);
+        this.getWeatherByUserLocation(latitude, longitude);
+      })
+      // .then(this.getWeatherByUserLocation())
+      .catch((err) => console.warn(err));
   }
 
   // get weather using geolocation
-  getWeatherByUserLocation() {
+  getWeatherByUserLocation(latitude, longitude) {
     this._isMounted = true;
-    const { latitude, longitude } = this.state;
+    // const { latitude, longitude } = this.state;
     axios.post('/api/weather', {
       latitude,
       longitude
@@ -82,7 +103,7 @@ class Entry extends Component {
 
   componentDidMount() {
     this.getUserLocation();
-    this.getWeatherByUserLocation();
+    // this.getWeatherByUserLocation();
   }
 
   handleTitleChange(e) {
@@ -120,7 +141,7 @@ class Entry extends Component {
 
         <form>
           <div className="weather">Currently {temp} and {weatherDescription}</div>
-          <input value={zipOrCity} placeholder="insert your zip code or city" onChange={this.getWeatherByUserInput}/>)
+          {/* <input value={zipOrCity} placeholder="insert your zip code or city" onChange={this.getWeatherByUserInput}/> */}
           <div>
             <input className="form-control"
               placeholder="Journal Entry Title"

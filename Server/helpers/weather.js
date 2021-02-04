@@ -8,9 +8,7 @@ const getWeatherByGeolocation = (latitude, longitude) => {
 
   return axios.get(url)
     .then(({ data }) => data)
-    .catch((err) => {
-      console.error('NEW FLAG--------', err);
-    });
+    .catch((err) => console.error('NEW FLAG--------', err));
 };
 
 const getWeatherByZipCode = (zipOrCity) => {
