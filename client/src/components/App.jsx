@@ -5,6 +5,7 @@ import Memory from './Memory.jsx';
 import Feed from './Feed.jsx';
 import axios from 'axios';
 import GoogleButton from 'react-google-button';
+import css from './style.css';
 
 class App extends Component {
   constructor(props) {

@@ -54,9 +54,8 @@ app.get('/auth/google',
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
-    // user is the key that done passed down and take just the ID
-    // setting cookie key to headstrong and value to user id
-    res.cookie('Headstrong', req.user.id);
+    // setting cookie key to headstrong and saving the user name
+    res.cookie('Headstrong', req.user.displayName);
     res.redirect('/');
   });
 
@@ -72,7 +71,7 @@ app.get('/isloggedin', (req, res) => {
 
 // route to logout
 app.delete('/logout', (req, res) => {
-  // delete the cookie key headstrong
+  // delete the cookie key headstrong when logging out
   res.clearCookie('Headstrong');
   res.json(false);
 });
@@ -85,7 +84,8 @@ app.get('/api/journals', (req, res) => {
 });
 
 app.post('/api/journals', (req, res) => {
-  return addJournals(req.body)
+//passing saved cookie with users name to add journals
+  return addJournals(req.body, req.cookies.Headstrong)
     .then((data) => res.json(data))
     .catch((err) => console.warn(err));
 });
