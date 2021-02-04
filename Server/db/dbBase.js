@@ -40,8 +40,19 @@ const Entries = sequelize.define('entries', {
     type: Sequelize.STRING(1000)
   },
 
+  temp: {
+    type: Sequelize.STRING
+  },
+
+  weatherDescription: {
+    type: Sequelize.STRING
+  }
+
 });
 
+// sequelize.sync({force: true})
+//   .then(() => console.info('We good'))
+//   .catch((err) => console.warn(err));
 
 const getAllJournals = () => {
   return Entries.findAll();
@@ -60,13 +71,15 @@ const deleteJournal = (body) => {
 
 const addJournals = async(body) => {
 
-  const { username, title, blog, journalImage } = body;
+  const { username, title, blog, journalImage, temp, weatherDescription } = body;
 
   const newEntry = await Entries.create({
     username: username,
     title: title,
     blog: blog,
     journalImage: journalImage,
+    temp: temp,
+    weatherDescription: weatherDescription
 
   });
 
