@@ -69,12 +69,14 @@ const deleteJournal = (body) => {
 };
 
 
-const addJournals = async(body) => {
+const addJournals = async(body, user) => {
 
-  const { username, title, blog, journalImage, temp, weatherDescription } = body;
+  console.info('USER', user);
+
+  const { title, blog, journalImage, temp, weatherDescription } = body;
 
   const newEntry = await Entries.create({
-    username: username,
+    username: user,
     title: title,
     blog: blog,
     journalImage: journalImage,
