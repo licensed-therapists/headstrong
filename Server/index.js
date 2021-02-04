@@ -5,10 +5,15 @@ const { Weather } = require('./api/weather');
 const { db, getAllJournals, addJournals, deleteJournal, updateJournal} = require('./db/dbBase.js');
 const { GoogleStrategy } = require('./passport.js');
 const passport = require('passport');
-require('dotenv').config();
+// require('dotenv').config();
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const sequelize = require('./db/dbBase.js');
+
+const dotenv = require('dotenv');
+dotenv.config({
+  path: path.resolve(__dirname, '../.env'),
+});
 
 const port = process.env.PORT || 8080;
 
@@ -19,6 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(dist));
 app.use('/api/quotes', Quotes);
+app.use('/api/weather', Weather);
 app.use(passport.initialize());
 app.use(passport.session());
 // used to parse cookies
