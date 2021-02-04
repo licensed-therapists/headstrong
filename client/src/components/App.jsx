@@ -55,7 +55,7 @@ class App extends Component {
   getRandomMemory() {
     axios.get('/api/journals')
       .then(({ data }) => {
-        const randomIndex = Math.floor(Math.random() * data.length + 1);
+        const randomIndex = Math.floor(Math.random() * data.length);
         // console.log('LOOK HERE*******', data[randomIndex]);
         this.setState({
           memory: data[randomIndex]
