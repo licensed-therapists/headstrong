@@ -24,7 +24,6 @@ class Entry extends Component {
     this.handlePostChange = this.handlePostChange.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
     this.getWeatherByUserLocation = this.getWeatherByUserLocation.bind(this);
-    this.getWeatherByUserInput = this.getWeatherByUserInput.bind(this);
     this.getUserLocation = this.getUserLocation.bind(this);
   }
 
