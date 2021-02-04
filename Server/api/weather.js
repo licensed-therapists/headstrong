@@ -7,7 +7,10 @@ Weather.post('/', (req, res) => {
 
   getWeatherByGeolocation(latitude, longitude)
     .then((data) => res.status(200).json(data))
-    .catch(() => res.sendStatus(404));
+    .catch((err) => {
+      console.warn('API----', err);
+      res.status(404);
+    });
 });
 
 module.exports = {

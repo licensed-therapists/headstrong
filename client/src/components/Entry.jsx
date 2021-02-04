@@ -44,23 +44,23 @@ class Entry extends Component {
   // get weather using geolocation
   getWeatherByUserLocation() {
     // this._isMounted = true;
-
+    const { latitude, longitude } = this.state;
     axios.post('/api/weather', {
-      latitude: this.state.latitude,
-      longitude: this.state.longitude
+      latitude,
+      longitude
     })
-      .then(({ data: { temp, weather } }) => {
+      .then(({ data: { data } }) => {
         // this._isMounted = false;
-        const { icon, description } = weather;
+        const { temp, weather } = data[0];
+        const { description } = weather;
         // change temperature to fahrenheit
-        temp = Math.round(temp * (9 / 5) + 32);
+        let newTemp = Math.round(temp * (9 / 5) + 32);
         this.setState({
-          temp: `${temp}°F`,
-          weatherIcon: icon,
+          temp: `${newTemp}°F`,
           weatherDescription: description
         });
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.warn(err));
   }
 
   componentDidMount() {
