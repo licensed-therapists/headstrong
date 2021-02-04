@@ -108,12 +108,12 @@ class App extends Component {
             ? <div>
               <img className='background' src='https://www.yesmagazine.org/wp-content/uploads/2018/08/issue-bann-1.jpg'/>
               <div className='main'>
-                <h1 className="text">
+                <div className="text">
                   <h1>Welcome To HeadStrong!</h1>
                   <h3>Where all your wildest dreams come</h3>
                   <h2>TRUE!</h2>
 
-                </h1>
+                </div>
               </div>
 
               <a className='loginButton' href="/auth/google"> <GoogleButton /></a>
