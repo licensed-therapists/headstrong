@@ -8,7 +8,7 @@ const Memory = ({memory}) => {
   const timeStamp = moment(createdAt).format('MMM Do YY');
 
   return (
-    <div key={id}>
+    <div className='text' key={id}>
       <div><i>Your memory from {timeStamp} | It was {temp} and {weatherDescription}</i></div>
       <div>{title}</div>
       <div>{blog}</div>
