@@ -5,10 +5,7 @@ const { getQuotes } = require('../helpers/quotes');
 Quotes.get('/', (req, res) => {
   getQuotes()
     .then((data) => res.status(200).json(data))
-    .catch((err) => {
-      console.log(err);
-      res.status(404);
-    });
+    .catch(() => res.status(404));
 });
 
 module.exports = {

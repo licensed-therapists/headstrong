@@ -8,7 +8,7 @@ const getGeolocationByIP = (userIP) => {
 
   return axios.get(url)
     .then(({ data }) => data)
-    .catch((err) => console.error('helpers err--', err));
+    .catch((err) => console.error(err));
 };
 
 module.exports = {
