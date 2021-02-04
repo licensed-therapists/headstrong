@@ -3,7 +3,7 @@ import React from 'react';
 const Feed = ({quoteText, quoteAuthor, entries}) => {
 
   return (
-    <div>
+    <div className='text'>
       <div>
         <h3>{quoteText} -{quoteAuthor}</h3>
       </div>

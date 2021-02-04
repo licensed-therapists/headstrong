@@ -6,6 +6,8 @@ import Feed from './Feed.jsx';
 import axios from 'axios';
 import GoogleButton from 'react-google-button';
 import css from './style.css';
+import { AppBar, Button } from '@material-ui/core';
+
 
 class App extends Component {
   constructor(props) {
@@ -100,43 +102,80 @@ class App extends Component {
 
     return (
       <div>
-        <div className='logo'>HeadStrong</div>
+
         {
           !login
             ? <div>
+              <img className='background' src='https://www.yesmagazine.org/wp-content/uploads/2018/08/issue-bann-1.jpg'/>
+              <div className='main'>
+                <h1 className="text">
+                  <h1>Welcome To HeadStrong!</h1>
+                  <h3>Where all your wildest dreams come</h3>
+                  <h2>TRUE!</h2>
 
-              <a href="/auth/google"> <GoogleButton /></a>
+                </h1>
+              </div>
+
+              <a className='loginButton' href="/auth/google"> <GoogleButton /></a>
             </div>
             :
             <div>
-              <div>
-                <div className='nav'>
-                  <span
-                    className={
-                      view === 'feed'
-                        ? 'nav-selected'
-                        : 'nav-unselected'}
-                    onClick={() => this.changeView('feed')}
-                  >
-        Home
-                  </span>
-                  <span
-                    className={view === 'entry' ? 'nav-selected' : 'nav-unselected'}
-                    onClick={() => this.changeView('entry')}
-                  >
-        Write Entry
-                  </span>
-                  <span
-                    className={view === 'memory' ? 'nav-selected' : 'nav-unselected'}
-                    onClick={() => this.changeView('memory')}
-                  >
-        Memory
-                  </span>
+              <AppBar>
+                <div className='logo'>
+                  HeadStrong
                 </div>
+                <div>
+                  <div className='nav'>
+                    <div className={
+                      (view === 'feed') ? 'currentButton' : 'button'
+                    }>
+                      <Button
 
+                        onClick={() => this.changeView('feed')}
+                      >
+        Home
+                      </Button>
+
+                    </div>
+                    <div className={
+                      (view === 'entry') ? 'currentButton' : 'button'
+                    }>
+                      <Button
+                        onClick={() => this.changeView('entry')}
+                      >
+        Write Entry
+                      </Button>
+
+                    </div>
+                    <div className={
+                      (view === 'memory') ? 'currentButton' : 'button'
+                    }>
+
+                      <Button
+                        onClick={() => this.changeView('memory')}
+                      >
+        Memory
+                      </Button>
+                    </div>
+                    <div className={
+                      (view === 'logout') ? 'currentButton' : 'button'
+                    }>
+                      <Button
+                        onClick={() => axios.delete('/logout')
+                          .then(({ data }) => this.logout(data))
+                          .catch((err) => console.warn(err))}
+                      >
+        logout
+                      </Button>
+                    </div>
+                  </div>
+
+                </div>
+              </AppBar>
+              <div>
+                <img className='background' src='https://www.yesmagazine.org/wp-content/uploads/2018/08/issue-bann-1.jpg'/>
                 <div className='main'>
                   { this.renderView()}
-
                 </div>
               </div>
             </div>

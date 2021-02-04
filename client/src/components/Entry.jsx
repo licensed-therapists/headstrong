@@ -94,11 +94,12 @@ class Entry extends Component {
   }
 
   render() {
+
     const { username, title, blog, journalImage, temp, weatherDescription } = this.state;
 
     return (
 
-      <div className="col-12 col-lg-6 offset-lg-3">
+      <div className="text">
 
         <form>
           <div className="weather">Currently {temp} and {weatherDescription}</div>
