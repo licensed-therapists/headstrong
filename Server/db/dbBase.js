@@ -87,12 +87,15 @@ const addJournals = async(body) => {
 };
 
 const updateJournal = (body) => {
-  const { username, title, blog, id } = body;
+  const { username, title, blog, id, journalImage, temp, weatherDescription } = body;
   //first object is what you want to change
   return Entries.update({
     username: username,
     blog: blog,
-    title: title
+    title: title,
+    journalImage: journalImage,
+    temp: temp,
+    weatherDescription: weatherDescription
   },
   {
     where: {
