@@ -16,9 +16,7 @@ class Entry extends Component {
       latitude: 0,
       longitude: 0,
       temp: '',
-      weatherIcon: '',
       weatherDescription: '',
-
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -81,14 +79,13 @@ class Entry extends Component {
   }
 
   handleSubmit() {
-    const { username, title, blog, journalImage, temp, weatherIcon, weatherDescription } = this.state;
+    const { username, title, blog, journalImage, temp, weatherDescription } = this.state;
     axios.post('/api/journals', {
       username: username,
       title: title,
       blog: blog,
       journalImage: journalImage,
       temp: temp,
-      weatherIcon: weatherIcon,
       weatherDescription: weatherDescription
     })
       .then((data) => console.log(data))

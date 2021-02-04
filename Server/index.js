@@ -5,7 +5,6 @@ const { Weather } = require('./api/weather');
 const { db, getAllJournals, addJournals, deleteJournal, updateJournal} = require('./db/dbBase.js');
 const { GoogleStrategy } = require('./passport.js');
 const passport = require('passport');
-// require('dotenv').config();
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const sequelize = require('./db/dbBase.js');
