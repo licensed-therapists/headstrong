@@ -37,7 +37,7 @@ const Entries = sequelize.define('entries', {
   },
 
   journalImage: {
-    type: Sequelize.STRING(1000)
+    type: Sequelize.STRING(10000)
   },
 
   temp: {
@@ -45,6 +45,10 @@ const Entries = sequelize.define('entries', {
   },
 
   weatherDescription: {
+    type: Sequelize.STRING
+  },
+
+  mood: {
     type: Sequelize.STRING
   }
 
@@ -54,8 +58,17 @@ const Entries = sequelize.define('entries', {
 //   .then(() => console.info('We good'))
 //   .catch((err) => console.warn(err));
 
-const getAllJournals = () => {
-  return Entries.findAll();
+const getAllJournals = (user) => {
+  if (user) {
+    return Entries.findAll({
+      where: {
+        username: user
+      }
+    });
+  } else {
+    return Entries.findAll();
+  }
+
 };
 
 
@@ -89,15 +102,13 @@ const addJournals = async(body, user) => {
 };
 
 const updateJournal = (body) => {
-  const { username, title, blog, id, journalImage, temp, weatherDescription } = body;
+  const { username, title, blog, id, journalImage } = body;
   //first object is what you want to change
   return Entries.update({
     username: username,
     blog: blog,
     title: title,
     journalImage: journalImage,
-    temp: temp,
-    weatherDescription: weatherDescription
   },
   {
     where: {

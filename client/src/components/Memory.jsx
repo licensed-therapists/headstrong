@@ -4,10 +4,10 @@ import moment from 'moment';
 const Memory = ({memory}) => {
 
   const { id, username, title, blog, journalImage, createdAt, temp, weatherDescription } = memory;
-
   const timeStamp = moment(createdAt).format('MMM Do YY');
 
   return (
+
     <div className='text' key={id}>
       <div><i>Your memory from {timeStamp} | It was {temp} and {weatherDescription}</i></div>
       <div>{title}</div>
