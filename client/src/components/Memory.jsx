@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { Button } from '@material-ui/core';
-
+import DeleteIcon from '@material-ui/icons/Delete';
 const Memory = ({memory}) => {
 
   const { id, username, title, blog, journalImage, createdAt, temp, weatherDescription } = memory;
@@ -19,7 +19,8 @@ const Memory = ({memory}) => {
         <Button
           className='Button'
           onClick={() => {}}>
-          Delete
+
+          <DeleteIcon/> Delete
         </Button>
       </div>
     </div>
