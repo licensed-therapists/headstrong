@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Entry from './Entry.jsx';
 import Memory from './Memory.jsx';
-//import Header from './Header.jsx';
 import Feed from './Feed.jsx';
 import axios from 'axios';
 import GoogleButton from 'react-google-button';
@@ -130,47 +129,28 @@ class App extends Component {
                 </div>
                 <div>
                   <div className='nav'>
+
                     <div className={
-                      (view === 'feed') ? 'currentButton' : 'button'
-                    }>
-                      <Button
-
-                        onClick={() => this.changeView('feed')}
-                      >
-        Home
-                      </Button>
-
+                      (view === 'feed') ? 'currentButton' : 'button'}>
+                      <Button onClick={() => this.changeView('feed')}>Home</Button>
                     </div>
-                    <div className={
-                      (view === 'entry') ? 'currentButton' : 'button'
-                    }>
-                      <Button
-                        onClick={() => this.changeView('entry')}
-                      >
-        Write Entry
-                      </Button>
 
-                    </div>
                     <div className={
-                      (view === 'memory') ? 'currentButton' : 'button'
-                    }>
+                      (view === 'entry') ? 'currentButton' : 'button'}>
+                      <Button onClick={() => this.changeView('entry')}>Write Entry</Button>
+                    </div>
 
-                      <Button
-                        onClick={() => this.changeView('memory')}
-                      >
-        Memory
-                      </Button>
-                    </div>
                     <div className={
-                      (view === 'logout') ? 'currentButton' : 'button'
-                    }>
-                      <Button
-                        onClick={() => axios.delete('/logout')
-                          .then(({ data }) => this.logout(data))
-                          .catch((err) => console.warn(err))}
-                      >
-        logout
-                      </Button>
+                      (view === 'memory') ? 'currentButton' : 'button'}>
+                      <Button onClick={() => this.changeView('memory')}>Memory</Button>
+                    </div>
+
+                    <div className={
+                      (view === 'logout') ? 'currentButton' : 'button'}>
+                      <Button onClick={() => axios.delete('/logout')
+                        .then(({ data }) => this.logout(data))
+                        .catch((err) => console.warn(err))}
+                      >Logout</Button>
                     </div>
                   </div>
 
@@ -178,9 +158,7 @@ class App extends Component {
               </AppBar>
               <div>
                 <img className='background' src='https://www.yesmagazine.org/wp-content/uploads/2018/08/issue-bann-1.jpg'/>
-                <div className='main'>
-                  { this.renderView()}
-                </div>
+                <div className='main'>{this.renderView()}</div>
               </div>
             </div>
         }
