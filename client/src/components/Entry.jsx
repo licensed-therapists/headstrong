@@ -149,7 +149,7 @@ class Entry extends Component {
         <div> <h3>What's your mood like today?</h3>
           <div style={{width: 300, margin: 30}}>
             <Slider
-              color="green"
+              // color="green"
               defaultValue={50}
               max={100}
               marks={mark}
