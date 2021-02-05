@@ -115,27 +115,27 @@ class Entry extends Component {
     ];
 
     return (
-      <div className="text">
+      <div className="text wrap">
 
         <form>
           <div className="weather">Currently {temp} and {weatherDescription}</div>
           <div>
             <textarea className="form-control"
-              placeholder="Journal Entry Title"
+              placeholder="Give your post a title"
               value={title}
               onChange={this.handleTitleChange}/>
           </div>
           <br></br>
           <div>
             <textarea className="form-control"
-              placeholder="Journal Entry Post"
+              placeholder="Enter your journal here..."
               value={blog}
               onChange={this.handlePostChange}/>
           </div>
           <br></br>
           <div>
             <textarea className="form-control"
-              placeholder="Insert image URL"
+              placeholder="Paste image URL here"
               value={journalImage}
               onChange={this.handleImageChange}/>
           </div>
@@ -146,9 +146,10 @@ class Entry extends Component {
 
         </form>
 
-        <div> <h3>What's your mood like today?</h3>
+        <div>
+          <h3><center>What's your mood like today?</center></h3>
           <div style={{width: 300, margin: 30}}>
-            <Slider
+            <Slider className="slider"
               // color="green"
               defaultValue={50}
               max={100}
