@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import GoogleButton from 'react-google-button';
+
 class Entry extends Component {
   constructor(props) {
     super(props);
@@ -9,7 +10,6 @@ class Entry extends Component {
     let _isMounted = false;
 
     this.state = {
-      username: '',
       title: '',
       blog: '',
       journalImage: '',
@@ -94,7 +94,7 @@ class Entry extends Component {
 
   render() {
 
-    const { username, title, blog, journalImage, temp, weatherDescription } = this.state;
+    const { title, blog, journalImage, temp, weatherDescription } = this.state;
 
     return (
 
@@ -103,24 +103,26 @@ class Entry extends Component {
         <form>
           <div className="weather">Currently {temp} and {weatherDescription}</div>
           <div>
-            <input className="form-control"
+            <textarea className="form-control"
               placeholder="Journal Entry Title"
               value={title}
               onChange={this.handleTitleChange}/>
           </div>
-
+          <br></br>
           <div>
             <textarea className="form-control"
               placeholder="Journal Entry Post"
               value={blog}
-              onChange={this.handlePostChange}>
-            </textarea>
+              onChange={this.handlePostChange}/>
           </div>
-
+          <br></br>
           <div>
-            <input value={ journalImage } placeholder="insert image url" className="btn btn-primary float-right" onChange={this.handleImageChange}/>
-            <button className="btn btn-primary float-left" onClick={() => this.handleSubmit()}>Submit</button>
+            <textarea className="form-control"
+              placeholder="Insert image URL"
+              value={journalImage}
+              onChange={this.handleImageChange}/>
           </div>
+          <button className="urlButton" onClick={() => this.handleSubmit()}>Submit</button>
           {
             journalImage.length ? <img style={{ height: '200px', width: '300px'}} src={ journalImage } /> : null
           }
