@@ -2,6 +2,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import GoogleButton from 'react-google-button';
+import { Slider } from '@material-ui/core';
+import { Typography } from '@material-ui/core/Typography';
+import {SentimentSatisfiedAltIcon} from '@material-ui/icons/SentimentSatisfiedAlt';
+import {SentimentVeryDissatisfiedIcon} from '@material-ui/icons/SentimentVeryDissatisfied';
 
 class Entry extends Component {
   constructor(props) {
@@ -95,9 +99,22 @@ class Entry extends Component {
   render() {
 
     const { title, blog, journalImage, temp, weatherDescription } = this.state;
+    const mark = [
+      {
+        value: 0,
+        label: 'sad'
+      },
+      {
+        value: 50,
+        label: 'neutral'
+      },
+      {
+        value: 100,
+        label: 'happy'
+      }
+    ];
 
     return (
-
       <div className="text">
 
         <form>
@@ -128,6 +145,19 @@ class Entry extends Component {
           }
 
         </form>
+
+        <div> <h3>What's your mood like today?</h3>
+          <div style={{width: 300, margin: 30}}>
+            <Slider
+              color="green"
+              defaultValue={50}
+              max={100}
+              marks={mark}
+              step={25}
+              valueLabelDisplay="auto"
+            />
+          </div>
+        </div>
       </div>
     );
   }
