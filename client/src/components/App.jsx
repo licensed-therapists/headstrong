@@ -107,10 +107,10 @@ class App extends Component {
           !login
             ? <div>
               <img className='background' src='https://www.yesmagazine.org/wp-content/uploads/2018/08/issue-bann-1.jpg'/>
-              <div className='main'>
+              <div className='loginMain'>
                 <div className="text">
                   <h1>Welcome To HeadStrong!</h1>
-                  <h3>Where all your wildest dreams come</h3>
+                  <h3>A stress-free, judgment free zone for you to get your thoughts out</h3>
                   <h2>TRUE!</h2>
 
                 </div>
