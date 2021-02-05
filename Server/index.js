@@ -80,7 +80,7 @@ app.delete('/logout', (req, res) => {
 
 
 app.get('/api/journals', (req, res) => {
-  return getAllJournals()
+  return getAllJournals(req.cookies.Headstrong)
     .then((data) => res.json(data))
     .catch((err) => console.warn(err));
 });
@@ -105,6 +105,7 @@ app.put('/api/journals', (req, res) => {
     .then((data) => res.send(data))
     .catch((err) => console.log(err));
 });
+
 
 
 
