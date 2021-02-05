@@ -4,7 +4,6 @@ import moment from 'moment';
 const Memory = ({memory}) => {
 
   const { id, username, title, blog, journalImage, createdAt, temp, weatherDescription } = memory;
-
   const timeStamp = moment(createdAt).format('MMM Do YY');
   // if no memory, show text directive to write a post!
   return (

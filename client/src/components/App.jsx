@@ -74,7 +74,11 @@ class App extends Component {
     } else if (view === 'entry') {
       return <Entry logout={this.logout}/>;
     } else if (view === 'memory') {
-      return <Memory logout={this.logout} memory={memory} />;
+      return (<div>
+        {memory ?
+          <Memory logout={this.logout} memory={memory} /> : <h1 className='text'>Create an ENTRY</h1>
+        }
+      </div>);
     }
   }
   componentDidMount() {
