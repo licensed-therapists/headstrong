@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import { Button } from '@material-ui/core';
 
 const Memory = ({memory}) => {
 
@@ -15,7 +16,15 @@ const Memory = ({memory}) => {
       <div><p>{blog}</p></div>
       <br></br>
       <div><img src={journalImage} alt="Memory Image" width="400px" height="auto" overflow="hidden"/></div>
-    </div>);
+      <div>
+        <Button
+          className='Button'
+          onClick={() => {}}>
+          Delete
+        </Button>
+      </div>
+    </div>
+  );
 };
 
 export default Memory;

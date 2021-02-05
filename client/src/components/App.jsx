@@ -128,24 +128,32 @@ class App extends Component {
 
                     <div className={
                       (view === 'feed') ? 'currentButton' : 'button'}>
-                      <Button onClick={() => this.changeView('feed')}>Home</Button>
+                      <Button
+                        className='Button'
+                        onClick={() => this.changeView('feed')}>Home</Button>
                     </div>
 
                     <div className={
                       (view === 'entry') ? 'currentButton' : 'button'}>
-                      <Button onClick={() => this.changeView('entry')}>Write Entry</Button>
+                      <Button
+                        className='Button'
+                        onClick={() => this.changeView('entry')}>Write Entry</Button>
                     </div>
 
                     <div className={
                       (view === 'memory') ? 'currentButton' : 'button'}>
-                      <Button onClick={() => this.changeView('memory')}>Memory</Button>
+                      <Button
+                        className='Button'
+                        onClick={() => this.changeView('memory')}>Memory</Button>
                     </div>
 
                     <div className={
                       (view === 'logout') ? 'currentButton' : 'button'}>
-                      <Button onClick={() => axios.delete('/logout')
-                        .then(({ data }) => this.logout(data))
-                        .catch((err) => console.warn(err))}
+                      <Button
+                        className='Button'
+                        onClick={() => axios.delete('/logout')
+                          .then(({ data }) => this.logout(data))
+                          .catch((err) => console.warn(err))}
                       >Logout</Button>
                     </div>
                   </div>

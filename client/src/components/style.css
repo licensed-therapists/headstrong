@@ -20,14 +20,15 @@
 
 .button {
 	margin-left: 5%;
-	background-color: gray;
+	background-color: cornflowerblue;
 	padding: 0px 5px;
 	border-radius: 5px;
-	cursor: pointer;
+  cursor: pointer;
+  color: white !important;
 }
 
-.button:hover {
-	color: #7a5ac5;
+.Button:hover {
+	color: #d13310;
 }
 
 .nav {
@@ -37,7 +38,7 @@
 
 .currentButton {
 	margin-left: 5%;
-	background-color: cornflowerblue;
+	background-color: LightSkyBlue;
 	padding: 0px 5px;
 	border-radius: 5px;
 }
@@ -122,3 +123,8 @@
 	align-items: center;
 	margin: 0 auto;
 }
+
+.text-value {
+  color: 'white';
+}
+

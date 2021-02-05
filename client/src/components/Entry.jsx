@@ -6,6 +6,9 @@ import { Slider } from '@material-ui/core';
 import { Typography } from '@material-ui/core/Typography';
 import {SentimentSatisfiedAltIcon} from '@material-ui/icons/SentimentSatisfiedAlt';
 import {SentimentVeryDissatisfiedIcon} from '@material-ui/icons/SentimentVeryDissatisfied';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+
 
 class Entry extends Component {
   constructor(props) {
@@ -99,6 +102,7 @@ class Entry extends Component {
   render() {
 
     const { title, blog, journalImage, temp, weatherDescription } = this.state;
+    //slider text
     const mark = [
       {
         value: 0,
@@ -113,6 +117,23 @@ class Entry extends Component {
         label: 'happy'
       }
     ];
+
+    //slider styling
+    const muiTheme = createMuiTheme({
+      overrides: {
+        MuiSlider: {
+          thumb: {
+            color: '#95cff4',
+          },
+          track: {
+            color: 'Aqua'
+          },
+          rail: {
+            color: 'Aquamarine'
+          }
+        }
+      }
+    });
 
     return (
       <div className="text wrap">
@@ -148,15 +169,17 @@ class Entry extends Component {
 
         <div>
           <h3><center>What's your mood like today?</center></h3>
+
           <div style={{width: 300, margin: 30}}>
-            <Slider className="slider"
-              // color="green"
-              defaultValue={50}
-              max={100}
-              marks={mark}
-              step={25}
-              valueLabelDisplay="auto"
-            />
+            <ThemeProvider theme={muiTheme}>
+              <Slider className="slider"
+                defaultValue={50}
+                max={100}
+                marks={mark}
+                step={25}
+                valueLabelDisplay="auto"
+              />
+            </ThemeProvider>
           </div>
         </div>
       </div>
