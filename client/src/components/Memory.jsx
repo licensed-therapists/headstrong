@@ -6,12 +6,14 @@ import axios from 'axios';
 
 const Memory = ({memory, changeMemory}) => {
 
-  const { id, username, title, blog, journalImage, createdAt, temp, weatherDescription } = memory;
+  const { id, username, title, blog, journalImage, createdAt, temp, weatherDescription, mood } = memory;
   const timeStamp = moment(createdAt).format('MMM Do YY');
   // if no memory, show text directive to write a post!
   return (
     <div className='text wrap' key={id}>
-      <div><i>Your memory from {timeStamp} | It was {temp} and {weatherDescription}</i></div>
+      <h2>Welcome back {username},</h2>
+      <br></br>
+      <div><i>Your memory from {timeStamp} | It was {temp} and {weatherDescription} and you were feeling at {mood}%</i></div>
       <br></br>
       <div><h2>{title}</h2></div>
       <div><p>{blog}</p></div>
