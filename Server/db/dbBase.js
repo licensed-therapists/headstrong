@@ -86,7 +86,8 @@ const addJournals = async(body, user) => {
 
   console.info('USER', user);
 
-  const { title, blog, journalImage, temp, weatherDescription } = body;
+  const { mood, title, blog, journalImage, temp, weatherDescription } = body;
+  console.info('MOOD', mood);
 
   const newEntry = await Entries.create({
     username: user,
@@ -94,7 +95,8 @@ const addJournals = async(body, user) => {
     blog: blog,
     journalImage: journalImage,
     temp: temp,
-    weatherDescription: weatherDescription
+    weatherDescription: weatherDescription,
+    mood: mood
 
   });
 
