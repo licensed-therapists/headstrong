@@ -30,8 +30,8 @@
 	background-color: cornflowerblue;
 	padding: 0px 5px;
 	border-radius: 5px;
-  cursor: pointer;
-  color: white !important;
+	cursor: pointer;
+	color: white !important;
 }
 
 .Button:hover {
@@ -55,7 +55,7 @@
 	height: 100vh;
 	width: 230vh;
 	position: fixed;
-	filter: invert(80%);
+	/* filter: invert(80%); */
 }
 
 .text {
@@ -133,7 +133,7 @@
 }
 
 .text-value {
-  color: 'white';
+	color: 'white';
 }
 
 .footer {
