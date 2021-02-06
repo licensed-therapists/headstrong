@@ -6,6 +6,7 @@ import axios from 'axios';
 import GoogleButton from 'react-google-button';
 import css from './style.css';
 import { AppBar, Button } from '@material-ui/core';
+// import img from './headstrong_girl_blue.jpg';
 
 
 class App extends Component {
@@ -110,7 +111,7 @@ class App extends Component {
         {
           !login
             ? <div>
-              <img className='background' src='https://www.yesmagazine.org/wp-content/uploads/2018/08/issue-bann-1.jpg'/>
+              <img className='background' src='https://i.ibb.co/WWs7MZd/headstrong-girl-blue.jpg'/>
               <div className='loginMain'>
                 <div className="text">
                   <h1>Welcome To HeadStrong!</h1>
@@ -175,7 +176,7 @@ class App extends Component {
               </AppBar>
 
               <div>
-                <img className='background' src='https://www.yesmagazine.org/wp-content/uploads/2018/08/issue-bann-1.jpg'/>
+                <img className='background' src='https://i.ibb.co/WWs7MZd/headstrong-girl-blue.jpg'/>
                 <div className='footer'>
                   <div className='logo2'>
                       HeadStrong
