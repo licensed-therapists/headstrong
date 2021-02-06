@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon Server/index.js",
-    "dev": "webpack"
+    "dev": "webpack",
+    "deploy": "gcloud functions deploy envFunction --env-vars-file .env.yaml"
   },
   "repository": {
     "type": "git",
