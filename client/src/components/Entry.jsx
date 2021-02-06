@@ -23,7 +23,8 @@ class Entry extends Component {
       latitude: 0,
       longitude: 0,
       temp: '',
-      weatherDescription: ''
+      weatherDescription: '',
+      mood: 50
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,6 +33,7 @@ class Entry extends Component {
     this.handleImageChange = this.handleImageChange.bind(this);
     this.getWeatherByUserLocation = this.getWeatherByUserLocation.bind(this);
     this.getUserLocation = this.getUserLocation.bind(this);
+    this.handleMoodChange = this.handleMoodChange.bind(this);
   }
 
   // get user's location by ip address
@@ -85,15 +87,21 @@ class Entry extends Component {
     this.setState({ journalImage: e.target.value });
   }
 
+  handleMoodChange(e, newValue) {
+    console.info('newValue', newValue);
+    this.setState({ mood: newValue });
+  }
+
   handleSubmit() {
-    const { username, title, blog, journalImage, temp, weatherDescription } = this.state;
+    const { username, title, blog, journalImage, temp, weatherDescription, mood } = this.state;
     axios.post('/api/journals', {
       username: username,
       title: title,
       blog: blog,
       journalImage: journalImage,
       temp: temp,
-      weatherDescription: weatherDescription
+      weatherDescription: weatherDescription,
+      mood: mood
     })
       .then((data) => console.log(data))
       .catch((err) => console.log(err));
@@ -101,7 +109,7 @@ class Entry extends Component {
 
   render() {
 
-    const { title, blog, journalImage, temp, weatherDescription } = this.state;
+    const { title, blog, journalImage, temp, weatherDescription, mood } = this.state;
     //slider text
     const mark = [
 
@@ -174,8 +182,8 @@ class Entry extends Component {
                   <SentimentVeryDissatisfiedIcon/>
                 </Grid>
                 <Grid item xs={10}>
-                  <Slider className="slider"
-                    defaultValue={50}
+                  <Slider onChange={this.handleMoodChange} className="slider"
+                    value={mood}
                     max={100}
                     marks={mark}
                     step={25}
