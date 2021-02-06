@@ -92,9 +92,8 @@ app.post('/api/journals', (req, res) => {
     .catch((err) => console.warn(err));
 });
 
-app.delete('/api/journals', (req, res) => {
-  // console.log(res);
-  return deleteJournal(req.body)
+app.delete('/api/journals/:id', (req, res) => {
+  return deleteJournal(req.params)
     .then((data) => res.json(data))
     .catch((err) => console.warn(err));
 });

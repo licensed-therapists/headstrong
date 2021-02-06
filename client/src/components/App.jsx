@@ -76,11 +76,12 @@ class App extends Component {
     } else if (view === 'memory') {
       return (<div>
         {memory ?
-          <Memory logout={this.logout} memory={memory} /> : <h1 className='text'>Create an ENTRY</h1>
+          <Memory logout={this.logout} memory={memory} changeMemory={ this.getRandomMemory }/> : <h1 className='text'>Create an ENTRY</h1>
         }
       </div>);
     }
   }
+
   componentDidMount() {
     this.getRandomQuote();
     this.getRandomMemory();
@@ -114,12 +115,20 @@ class App extends Component {
                 <div className="text">
                   <h1>Welcome To HeadStrong!</h1>
                   <h3>A stress-free, judgment free zone for you to get your thoughts out</h3>
-                  <h2>TRUE!</h2>
+                  <h2></h2>
 
                 </div>
               </div>
 
               <a className='loginButton' href="/auth/google"> <GoogleButton /></a>
+              <div className='footer'>
+                <div className='logo2'>
+                      HeadStrong
+                </div>
+                <div className='footer-text'>
+                    Since 2021
+                </div>
+              </div>
             </div>
             :
             <div>
@@ -164,8 +173,17 @@ class App extends Component {
 
                 </div>
               </AppBar>
+
               <div>
                 <img className='background' src='https://www.yesmagazine.org/wp-content/uploads/2018/08/issue-bann-1.jpg'/>
+                <div className='footer'>
+                  <div className='logo2'>
+                      HeadStrong
+                  </div>
+                  <div className='footer-text'>
+                    Since 2021
+                  </div>
+                </div>
                 <div className='main'>{this.renderView()}</div>
               </div>
             </div>
