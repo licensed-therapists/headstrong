@@ -1,8 +1,14 @@
 const Sequelize = require('sequelize');
 const { QueryTypes } = require('sequelize');
+const dotenv = require('dotenv').config();
 
-const sequelize = new Sequelize('b7i6rsjwzlwsyfz7le7a', 'uwpqitz9sxjsbq9y', '4sCvHnhBpmu3CXRg3rFD', {
-  host: 'b7i6rsjwzlwsyfz7le7a-mysql.services.clever-cloud.com',
+const host = process.env.host;
+const database = process.env.database;
+const password = process.env.password;
+const username = process.env.username;
+
+const sequelize = new Sequelize(database, username, password, {
+  host: host,
   dialect: 'mysql',
 
 });
