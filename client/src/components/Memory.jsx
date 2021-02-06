@@ -13,7 +13,7 @@ const Memory = ({memory, changeMemory}) => {
     <div className='text wrap' key={id}>
       <h2>Welcome back {username},</h2>
       <br></br>
-      <div><i>Your memory from {timeStamp} | It was {temp} and {weatherDescription} and you were feeling at {mood}%</i></div>
+      <div><i>Your memory from {timeStamp} | It was {temp} and {weatherDescription} and you were feeling {mood}% happy!</i></div>
       <br></br>
       <div><h2>{title}</h2></div>
       <div><p>{blog}</p></div>
