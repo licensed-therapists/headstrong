@@ -22,6 +22,7 @@ const Memory = ({memory, changeMemory}) => {
       <div>
         <Button
           className='Button'
+          style={{ color: 'white' }}
           onClick={() => axios.delete(`/api/journals/${id}`)
             .then(() => changeMemory())
             .catch((err) => console.warn(err))}>
@@ -29,8 +30,9 @@ const Memory = ({memory, changeMemory}) => {
         </Button>
         <Button
           className='Button'
+          style={{ color: 'white', fontFamily: 'Roboto' }}
           onClick={() => changeMemory()}>
-          New Random Memory
+          View Another Memory
         </Button>
       </div>
     </div>
