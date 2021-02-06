@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Entry from './Entry.jsx';
 import Memory from './Memory.jsx';
-//import Header from './Header.jsx';
 import Feed from './Feed.jsx';
 import axios from 'axios';
 import GoogleButton from 'react-google-button';
 import css from './style.css';
 import { AppBar, Button } from '@material-ui/core';
+import img from './headstrong_girl_blue.jpg';
 
 
 class App extends Component {
@@ -75,9 +75,14 @@ class App extends Component {
     } else if (view === 'entry') {
       return <Entry logout={this.logout}/>;
     } else if (view === 'memory') {
-      return <Memory logout={this.logout} memory={memory} />;
+      return (<div>
+        {memory ?
+          <Memory logout={this.logout} memory={memory} changeMemory={ this.getRandomMemory }/> : <h1 className='text'>Create an ENTRY</h1>
+        }
+      </div>);
     }
   }
+
   componentDidMount() {
     this.getRandomQuote();
     this.getRandomMemory();
@@ -106,17 +111,25 @@ class App extends Component {
         {
           !login
             ? <div>
-              <img className='background' src='https://www.yesmagazine.org/wp-content/uploads/2018/08/issue-bann-1.jpg'/>
+              <img className='background' src={img}/>
               <div className='loginMain'>
                 <div className="text">
                   <h1>Welcome To HeadStrong!</h1>
                   <h3>A stress-free, judgment free zone for you to get your thoughts out</h3>
-                  <h2>TRUE!</h2>
+                  <h2></h2>
 
                 </div>
               </div>
 
               <a className='loginButton' href="/auth/google"> <GoogleButton /></a>
+              <div className='footer'>
+                <div className='logo2'>
+                      HeadStrong
+                </div>
+                <div className='footer-text'>
+                    Since 2021
+                </div>
+              </div>
             </div>
             :
             <div>
@@ -126,57 +139,53 @@ class App extends Component {
                 </div>
                 <div>
                   <div className='nav'>
+
                     <div className={
-                      (view === 'feed') ? 'currentButton' : 'button'
-                    }>
+                      (view === 'feed') ? 'currentButton' : 'button'}>
                       <Button
-
-                        onClick={() => this.changeView('feed')}
-                      >
-        Home
-                      </Button>
-
+                        className='Button'
+                        onClick={() => this.changeView('feed')}>Home</Button>
                     </div>
-                    <div className={
-                      (view === 'entry') ? 'currentButton' : 'button'
-                    }>
-                      <Button
-                        onClick={() => this.changeView('entry')}
-                      >
-        Write Entry
-                      </Button>
 
-                    </div>
                     <div className={
-                      (view === 'memory') ? 'currentButton' : 'button'
-                    }>
+                      (view === 'entry') ? 'currentButton' : 'button'}>
+                      <Button
+                        className='Button'
+                        onClick={() => this.changeView('entry')}>Write Entry</Button>
+                    </div>
 
-                      <Button
-                        onClick={() => this.changeView('memory')}
-                      >
-        Memory
-                      </Button>
-                    </div>
                     <div className={
-                      (view === 'logout') ? 'currentButton' : 'button'
-                    }>
+                      (view === 'memory') ? 'currentButton' : 'button'}>
                       <Button
+                        className='Button'
+                        onClick={() => this.changeView('memory')}>Memory</Button>
+                    </div>
+
+                    <div className={
+                      (view === 'logout') ? 'currentButton' : 'button'}>
+                      <Button
+                        className='Button'
                         onClick={() => axios.delete('/logout')
                           .then(({ data }) => this.logout(data))
                           .catch((err) => console.warn(err))}
-                      >
-        logout
-                      </Button>
+                      >Logout</Button>
                     </div>
                   </div>
 
                 </div>
               </AppBar>
+
               <div>
-                <img className='background' src='https://www.yesmagazine.org/wp-content/uploads/2018/08/issue-bann-1.jpg'/>
-                <div className='main'>
-                  { this.renderView()}
+                <img className='background' src={img}/>
+                <div className='footer'>
+                  <div className='logo2'>
+                      HeadStrong
+                  </div>
+                  <div className='footer-text'>
+                    Since 2021
+                  </div>
                 </div>
+                <div className='main'>{this.renderView()}</div>
               </div>
             </div>
         }
