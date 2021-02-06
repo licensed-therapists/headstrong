@@ -167,9 +167,9 @@ class Entry extends Component {
         <div>
           <h3><center>What's your mood like today?</center></h3>
 
-          <div className="slider" style={{width: 300, margin: 30}}>
+          <div className="slider" style={{width: 300, marginLeft: 70}}>
             <ThemeProvider theme={muiTheme}>
-              <Grid container className="grid" align = "center" justify = "center" alignItems = "center">
+              <Grid container className="grid" display="flex" align="center" justify="center" alignItems="center">
                 <Grid item>
                   <SentimentVeryDissatisfiedIcon/>
                 </Grid>

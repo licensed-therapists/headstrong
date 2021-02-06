@@ -185,7 +185,11 @@ class App extends Component {
                     Since 2021
                   </div>
                 </div>
-                <div className='main'>{this.renderView()}</div>
+
+                <div className='main'>
+                  {this.renderView()}
+                </div>
+
               </div>
             </div>
         }
