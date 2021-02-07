@@ -6,8 +6,6 @@ import axios from 'axios';
 import GoogleButton from 'react-google-button';
 import css from './style.css';
 import { AppBar, Button } from '@material-ui/core';
-// import img from './headstrong_girl_blue.jpg';
-
 
 class App extends Component {
   constructor(props) {
@@ -24,7 +22,6 @@ class App extends Component {
       memory: null,
     };
 
-    // this.handleSubmit = this.handleSubmit.bind(this);
     this.getRandomQuote = this.getRandomQuote.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.logout = this.logout.bind(this);
@@ -40,6 +37,7 @@ class App extends Component {
     });
   }
 
+  // get random quote for home page
   getRandomQuote() {
     axios.get('/api/quotes')
       .then(({ data }) => {
@@ -55,17 +53,18 @@ class App extends Component {
       }).catch((err) => console.error(err));
   }
 
+  // get random memory for memory page
   getRandomMemory() {
     axios.get('/api/journals')
       .then(({ data }) => {
         const randomIndex = Math.floor(Math.random() * data.length);
-        // console.log('LOOK HERE*******', data[randomIndex]);
         this.setState({
           memory: data[randomIndex]
         });
       }).catch((err) => console.error(err));
   }
 
+  // render view based on nav
   renderView() {
     const { view, entries, quoteText, quoteAuthor, memory } = this.state;
     if (view === 'feed') {
@@ -202,20 +201,6 @@ class App extends Component {
       </div>
     );
   }
-
-
-
-
-
 }
-
-// return (
-
-//)
-
-
-
-
-
 
 export default App;

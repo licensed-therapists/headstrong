@@ -103,24 +103,17 @@ class Entry extends Component {
       weatherDescription: weatherDescription,
       mood: mood
     })
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+      .then((data) => console.info(data))
+      .catch((err) => console.warn(err));
   }
 
   render() {
 
     const { title, blog, journalImage, temp, weatherDescription, mood } = this.state;
-    //slider text
+    //slider values
     const mark = [
-
-      {
-        value: 50,
-
-      },
-      {
-        value: 100,
-
-      }
+      { value: 50 },
+      { value: 100 }
     ];
 
     //slider styling
