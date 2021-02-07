@@ -60,10 +60,6 @@ const Entries = sequelize.define('entries', {
 
 });
 
-// sequelize.sync({force: true})
-//   .then(() => console.info('We good'))
-//   .catch((err) => console.warn(err));
-
 const getAllJournals = (user) => {
   if (user) {
     return Entries.findAll({
@@ -74,9 +70,7 @@ const getAllJournals = (user) => {
   } else {
     return Entries.findAll();
   }
-
 };
-
 
 const deleteJournal = (body) => {
   const { id } = body;
@@ -87,13 +81,9 @@ const deleteJournal = (body) => {
   });
 };
 
-
 const addJournals = async(body, user) => {
 
-  console.info('USER', user);
-
   const { mood, title, blog, journalImage, temp, weatherDescription } = body;
-  console.info('MOOD', mood);
 
   const newEntry = await Entries.create({
     username: user,
@@ -103,7 +93,6 @@ const addJournals = async(body, user) => {
     temp: temp,
     weatherDescription: weatherDescription,
     mood: mood
-
   });
 
   return newEntry.save();

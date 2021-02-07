@@ -1,10 +1,16 @@
-# headstrong
-senior immersion greenfield app
+# Headstrong
+Senior Immersion Greenfield App
+Product Owner: Edward Ellington
+Scrum Master: Ian Wright
+Development Team: Edward Ellington, Caity Opelka, Patrice Williams, Ian Wright
 
 ## Description
 Headstrong is an application designed to provide the user with a relaxing, stress-free environment to write out their thoughts without any judgment. It is designed to improve the user's mental health.
+
 Upon entering the site, users are greeted by a motivational quote. They can then click on write entry, enter in a title, a journal body and upload an image. Users are also prompted to select their present mood. The memory will be captured with the current weather at the user's location.
+
 At any point, a user can view a memory to reflect on their progress. Memories can be deleted or refreshed for a new random memory. If the user does not like their memory, they have the option to delete it.
+
 ## Dependencies
 ```"dependencies": {
     "@material-ui/core": "^4.11.3",
@@ -63,6 +69,9 @@ https://api.ipify.org
 
 Quotes API
 https://type.fit/api/quotes
+
+Sample data can be found in the project's root
+
 ## Google OAuth
 Google Oauth requires a google cloud account. First create your account and then navigate to the developer console. Go to google API and create a clientID and clientSecret. This goes inside the .env file.
 
@@ -81,6 +90,4 @@ If Sequelize is installed, start the server:
 sequelize.sync
 If Sequelize is not installed, check out the Sequelize documentation for instructions on how to proceed.
 https://sequelize.org/master/manual/getting-started.html
-
-
 

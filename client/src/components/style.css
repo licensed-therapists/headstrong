@@ -16,7 +16,6 @@
 	position: fixed;
 	text-align: center;
 	left: 25%;
-	/* top: 50%; */
 }
 
 .main {
@@ -55,7 +54,6 @@
 	height: 100vh;
 	width: 230vh;
 	position: fixed;
-	/* filter: invert(80%); */
 }
 
 .text {
@@ -98,7 +96,6 @@
 }
 
 ::placeholder {
-	/* Most modern browsers support this now. */
 	color: #95cff4;
 }
 

@@ -8,7 +8,7 @@ const Memory = ({memory, changeMemory}) => {
 
   const { id, username, title, blog, journalImage, createdAt, temp, weatherDescription, mood } = memory;
   const timeStamp = moment(createdAt).format('MMM Do YY');
-  // if no memory, show text directive to write a post!
+
   return (
     <div className='text wrap' key={id}>
       <h2>Welcome back {username},</h2>

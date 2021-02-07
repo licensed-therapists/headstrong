@@ -28,10 +28,9 @@ app.use('/api/weather', Weather);
 app.use('/api/location', Location);
 app.use(passport.initialize());
 app.use(passport.session());
-// used to parse cookies
 app.use(cookieParser());
 
-// line 20 - 40 all used for google login
+// line 34 - 61 all used for google login
 app.use(
   session({
     secret: process.env.clientSecret,
@@ -56,7 +55,7 @@ app.get('/auth/google',
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
-    // setting cookie key to headstrong and saving the user name
+    // setting cookie key to headstrong and saving the username
     res.cookie('Headstrong', req.user.displayName);
     res.redirect('/');
   });
