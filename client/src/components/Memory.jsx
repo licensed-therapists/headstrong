@@ -1,42 +1,73 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { Button } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
+import NoMemory from './NoMemory.jsx';
 
-const Memory = ({memory, changeMemory}) => {
+const Memory = () => {
+  const [memory, setMemory] = useState({});
 
   const { id, username, title, blog, journalImage, createdAt, temp, weatherDescription, mood } = memory;
   const timeStamp = moment(createdAt).format('MMM Do YY');
 
-  return (
-    <div className='text wrap' key={id}>
-      <h2>Welcome back {username},</h2>
-      <br></br>
+  const getRandomMemory = () => {
+    axios.get('/api/journals')
+      .then(({ data }) => {
+        const randomIndex = Math.floor(Math.random() * data.length);
+        setMemory(data[randomIndex]);
+      }).catch((err) => console.error(err));
+  };
+
+  const deleteEntry = () => {
+    axios.delete(`/api/journals/${id}`)
+      .then(getRandomMemory)
+      .catch((err) => console.warn(err));
+  };
+
+  const showJournalImage = () => {
+    if (journalImage) {
+      <img
+        style={{ height: '200px', width: '300px'}}
+        src={journalImage}
+        alt="Memory Image"
+        width="400px"
+        height="auto"
+        overflow="hidden"
+      />;
+    }
+  };
+
+  useEffect(() => {
+    getRandomMemory();
+  }, []);
+
+  return memory
+    ? (<div className='text wrap' key={id}>
+      <h2>Welcome back, {username}</h2>
+      <br />
       <div><i>Your memory from {timeStamp} | It was {temp} and {weatherDescription} and you were feeling {mood}% happy!</i></div>
-      <br></br>
+      <br />
       <div><h2>{title}</h2></div>
       <div><p>{blog}</p></div>
-      <br></br>
-      <div><img style={{ height: '200px', width: '300px'}} src={journalImage} alt="Memory Image" width="400px" height="auto" overflow="hidden"/></div>
+      <br />
+      <div>{showJournalImage()}</div>
       <div>
         <Button
           className='Button'
           style={{ color: 'white' }}
-          onClick={() => axios.delete(`/api/journals/${id}`)
-            .then(() => changeMemory())
-            .catch((err) => console.warn(err))}>
+          onClick={deleteEntry}>
           <DeleteIcon/>
         </Button>
         <Button
           className='Button'
           style={{ color: 'white', fontFamily: 'Roboto' }}
-          onClick={() => changeMemory()}>
+          onClick={getRandomMemory}>
           View Another Memory
         </Button>
       </div>
-    </div>
-  );
+    </div>)
+    : <NoMemory />;
 };
 
 export default Memory;

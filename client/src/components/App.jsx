@@ -8,14 +8,11 @@ import css from './style.css';
 import { AppBar, Button } from '@material-ui/core';
 
 const App = () => {
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
   const [quoteText, setQuoteText] = useState('');
   const [quoteAuthor, setQuoteAuthor] = useState('');
   const [login, setLogin] = useState(false);
   const [view, setView] = useState('feed');
   const [entries, setEntries] = useState([]);
-  const [memory, setMemory] = useState(null);
 
   // change views depending on what you click
   const changeView = (option) => setView(option);
@@ -28,21 +25,8 @@ const App = () => {
         const { text, author } = data[randomIndex];
         setQuoteText(text);
         !author ? setQuoteAuthor('Anonymous') : setQuoteAuthor(author);
-
-        // if (!quoteAuthor) {
-        //   setQuoteAuthor('Anonymous');
-        // }
       })
       .catch((err) => console.error('error getting random quote', err));
-  };
-
-  // get random memory for memory page
-  const getRandomMemory = () => {
-    axios.get('/api/journals')
-      .then(({ data }) => {
-        const randomIndex = Math.floor(Math.random() * data.length);
-        setMemory(data[randomIndex]);
-      }).catch((err) => console.error(err));
   };
 
   // render view based on nav
@@ -55,25 +39,7 @@ const App = () => {
     } else if (view === 'entry') {
       return <Entry logout={logout}/>;
     } else if (view === 'memory') {
-      return (<div>
-        {memory
-          ? <Memory
-            logout={logout}
-            memory={memory}
-            changeMemory={getRandomMemory}/>
-          : <div className='text wrap'
-            style={{display: 'flex',
-              flexDirection: 'column',
-              align: 'center',
-              justify: 'center',
-              alignItems: 'center'}}>
-            {/* <img src="https://content.invisioncic.com/r143258/monthly_2016_01/b5b2b1603073cc426b410d1ba620685d.jpg.28d5f653fbeaef692ba8a5f70aaf1f44.jpg"/> */}
-            <h1><i>Ruh roh!</i></h1>
-            <h3>It looks like you don't have any memories yet.
-          Write an entry to view a random memory.</h3>
-          </div>
-        }
-      </div>);
+      return <Memory />;
     }
   };
 
@@ -89,7 +55,6 @@ const App = () => {
     renderView();
     isLoggedIn();
     getRandomQuote();
-    getRandomMemory();
   }, []);
 
   return (
