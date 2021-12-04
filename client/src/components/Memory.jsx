@@ -42,8 +42,9 @@ const Memory = () => {
     getRandomMemory();
   }, []);
 
-  return memory
-    ? (<div className='text wrap' key={id}>
+  return !memory
+    ? <NoMemory />
+    : (<div className='text wrap' key={id}>
       <h2>Welcome back, {username}</h2>
       <br />
       <div><i>Your memory from {timeStamp} | It was {temp} and {weatherDescription} and you were feeling {mood}% happy!</i></div>
@@ -66,8 +67,7 @@ const Memory = () => {
           View Another Memory
         </Button>
       </div>
-    </div>)
-    : <NoMemory />;
+    </div>);
 };
 
 export default Memory;
