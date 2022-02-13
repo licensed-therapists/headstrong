@@ -39,9 +39,10 @@ class Entry extends Component {
   // get user's location by ip address
   getUserLocation() {
     //get user's ip address
-    return axios.get('https://api.ipify.org')
+    return axios.get('/api/location')
     // get location data by ip address
       .then(({ data }) => axios.post('/api/location', { ip: data }))
+      // .then(data => console.log('what\'s this: ', data))
       .then(({ data: { latitude, longitude } }) => {
         this.setState({
           latitude: latitude,

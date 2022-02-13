@@ -9,8 +9,7 @@ const username = process.env.username;
 
 const sequelize = new Sequelize(database, username, password, {
   host: host,
-  dialect: 'mysql',
-
+  dialect: 'mysql'
 });
 
 sequelize.authenticate()
@@ -19,7 +18,6 @@ sequelize.authenticate()
 
 
 const Entries = sequelize.define('entries', {
-
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -59,6 +57,7 @@ const Entries = sequelize.define('entries', {
   }
 
 });
+Entries.sync();
 
 const getAllJournals = (user) => {
   if (user) {
