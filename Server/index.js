@@ -3,12 +3,12 @@ const express = require('express');
 const { Quotes } = require('./api/quotes');
 const { Weather } = require('./api/weather');
 const { Location } = require('./api/geolocation');
-const { db, getAllJournals, addJournals, deleteJournal, updateJournal} = require('./db/dbBase.js');
+const { db, getAllJournals, addJournals, deleteJournal, updateJournal} = require('./db/index.js');
 const { GoogleStrategy } = require('./passport.js');
 const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const sequelize = require('./db/dbBase.js');
+const sequelize = require('./db/index.js');
 
 const dotenv = require('dotenv');
 dotenv.config({
@@ -77,7 +77,6 @@ app.delete('/logout', (req, res) => {
   res.json(false);
 });
 
-
 app.get('/api/journals', (req, res) => {
   return getAllJournals(req.cookies.Headstrong)
     .then((data) => res.json(data))
@@ -103,9 +102,6 @@ app.put('/api/journals', (req, res) => {
     .then((data) => res.send(data))
     .catch((err) => console.log(err));
 });
-
-
-
 
 app.listen(port, () => {
   console.log(`Server is listening on http://127.0.0.1:${port}`);
