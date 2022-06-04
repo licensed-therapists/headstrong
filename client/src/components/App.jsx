@@ -17,6 +17,12 @@ const App = () => {
   // change views depending on what you click
   const changeView = (option) => setView(option);
 
+  const getAllMemories = () => {
+    axios.get('/api/journals')
+      .then(({ data }) => setEntries(data))
+      .catch((err) => console.error('cannot get journals', err));
+  };
+
   // get random quote for home page
   const getRandomQuote = () => {
     axios.get('/api/quotes')
@@ -39,7 +45,7 @@ const App = () => {
     } else if (view === 'entry') {
       return <Entry logout={logout}/>;
     } else if (view === 'memory') {
-      return <Memory />;
+      return <Memory entries={entries} getAllMemories={getAllMemories}/>;
     }
   };
 
@@ -54,6 +60,7 @@ const App = () => {
   useEffect(() => {
     renderView();
     isLoggedIn();
+    getAllMemories();
     getRandomQuote();
   }, []);
 

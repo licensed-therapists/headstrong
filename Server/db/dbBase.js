@@ -9,7 +9,8 @@ const username = process.env.username;
 
 const sequelize = new Sequelize(database, username, password, {
   host: host,
-  dialect: 'mysql'
+  dialect: 'mysql',
+  logging: false
 });
 
 sequelize.authenticate()

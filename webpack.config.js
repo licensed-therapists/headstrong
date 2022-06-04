@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
+  devtool: 'eval',
   entry: path.resolve(__dirname, 'client', 'src', 'Index.jsx'),
   output: {
     path: path.resolve(__dirname, 'client', 'dist'),

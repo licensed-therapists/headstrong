@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import GoogleButton from 'react-google-button';
+// import GoogleButton from 'react-google-button';
 import { Slider } from '@material-ui/core';
-import { Typography } from '@material-ui/core/Typography';
+// import { Typography } from '@material-ui/core/Typography';
 import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -27,7 +27,6 @@ const Entry = () => {
     return axios.get('/api/location')
     // get location data by ip address
       .then(({ data }) => axios.post('/api/location', { ip: data }))
-      // .then(data => console.log('what\'s this: ', data))
       .then(({ data: { latitude, longitude } }) => {
         setLatitude(latitude);
         setLongitude(longitude);
@@ -55,28 +54,15 @@ const Entry = () => {
     getUserLocation();
   }, []);
 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
+  const handleChange = (e, setType) => {
+    setType(e.target.value);
   };
 
-  const handlePostChange = (e) => {
-    setBlog(e.target.value);
-  };
-
-  const handleImageChange = (e) => {
-    setJournalImage(e.target.value);
-  };
-
-  const handleMoodChange = (e, newValue) => {
-    // console.info('newValue', newValue);
-    setMood(newValue);
-  };
+  const handleMoodChange = (e, newValue) => setMood(newValue);
 
   const handleSubmit = () => {
-    axios.post('/api/journals', {
-      title, blog, journalImage, temp, weatherDescription, mood
-    })
-      .then((data) => console.info(data))
+    axios.post('/api/journals', { title, blog, journalImage, temp, weatherDescription, mood })
+      .then((data) => console.info('journal submitted:\n', data))
       .catch((err) => console.warn(err));
   };
 
@@ -86,59 +72,48 @@ const Entry = () => {
     { value: 100 }
   ];
 
-  // slider styling
   const sliderStyle = createMuiTheme({
     overrides: {
       MuiSlider: {
-        thumb: {
-          color: '#95cff4',
-        },
-        track: {
-          color: 'Aqua'
-        },
-        rail: {
-          color: 'Aquamarine'
-        }
+        thumb: { color: '#95cff4' },
+        track: { color: 'Aqua' },
+        rail: { color: 'Aquamarine' }
       }
     }
   });
 
   return (
     <div className="text wrap">
-
       <form>
         <div className="weather">Currently {temp} and {weatherDescription}</div>
         <div>
           <textarea className="form-control"
             placeholder="Give your post a title"
             value={title}
-            onChange={handleTitleChange}/>
+            onChange={(e) => handleChange(e, setTitle)}/>
         </div>
         <br></br>
         <div>
           <textarea className="form-control"
             placeholder="Enter your journal here..."
             value={blog}
-            onChange={handlePostChange}/>
+            onChange={(e) => handleChange(e, setBlog)}/>
         </div>
         <br></br>
         <div>
           <textarea className="form-control"
             placeholder="Paste image URL here"
             value={journalImage}
-            onChange={handleImageChange}/>
+            onChange={(e) => handleChange(e, setJournalImage)}/>
         </div>
         <button className="urlButton" onClick={handleSubmit}>Submit</button>
-        {
-          journalImage.length ? <img style={{ height: '200px', width: '300px'}} src={ journalImage } /> : null
-        }
-
+        { journalImage ? <img style={{ height: 'auto', width: '300px' }} src={journalImage} /> : null }
       </form>
 
       <div>
         <h3><center>What's your mood like today?</center></h3>
 
-        <div className="slider" style={{width: 300, marginLeft: 70}}>
+        <div className="slider" style={{ width: 300, marginLeft: 70 }}>
           <ThemeProvider theme={sliderStyle}>
             <Grid container className="grid" display="flex" align="center" justify="center" alignItems="center">
               <Grid item>
