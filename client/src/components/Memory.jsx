@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import { Button } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 import NoMemory from './NoMemory.jsx';
 

@@ -5,7 +5,8 @@ import Feed from './Feed.jsx';
 import axios from 'axios';
 import GoogleButton from 'react-google-button';
 import css from './style.css';
-import { AppBar, Button } from '@material-ui/core';
+import AppBar from '@mui/material/AppBar';
+import Button from '@mui/material/Button';
 
 const App = () => {
   const [quoteText, setQuoteText] = useState('');

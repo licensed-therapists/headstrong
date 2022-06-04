@@ -33,7 +33,7 @@ app.use(cookieParser());
 // line 34 - 61 all used for google login
 app.use(
   session({
-    secret: process.env.clientSecret,
+    secret: process.env.CLIENTSECRET,
     saveUninitialized: false,
     resave: true,
   }),

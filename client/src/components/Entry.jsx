@@ -1,14 +1,11 @@
 /* eslint-disable camelcase */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import GoogleButton from 'react-google-button';
-import { Slider } from '@material-ui/core';
-// import { Typography } from '@material-ui/core/Typography';
-import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt';
-import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
-import Grid from '@material-ui/core/Grid';
+import Slider from '@mui/material/Slider';
+import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
 
 
 const Entry = () => {
@@ -72,7 +69,7 @@ const Entry = () => {
     { value: 100 }
   ];
 
-  const sliderStyle = createMuiTheme({
+  const sliderStyle = createTheme({
     overrides: {
       MuiSlider: {
         thumb: { color: '#95cff4' },
