@@ -103,6 +103,12 @@ app.put('/api/journals', (req, res) => {
     .catch((err) => console.log(err));
 });
 
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(dist, 'index.html'), (err) => {
+    if (err) {res.status(500).send(err);}
+  })
+})
+
 app.listen(port, () => {
   console.log(`Server is listening on http://127.0.0.1:${port}`);
 });

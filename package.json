@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon Server",
-    "dev": "webpack",
+    "start": "nodemon servers",
+    "dev": "NODE_OPTIONS=\"--openssl-legacy-provider\"  webpack",
     "deploy": "gcloud functions deploy envFunction --env-vars-file .env.yaml"
   },
   "repository": {
@@ -43,7 +43,7 @@
     "react-google-button": "^0.7.2",
     "react-google-login": "^5.2.2",
     "react-router-dom": "^6.3.0",
-    "sequelize": "^6.5.0",
+    "sequelize": "^6.31.0",
     "style-loader": "^2.0.0"
   },
   "devDependencies": {
