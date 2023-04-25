@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon servers",
+    "start": "nodemon server",
     "dev": "NODE_OPTIONS=\"--openssl-legacy-provider\"  webpack",
     "deploy": "gcloud functions deploy envFunction --env-vars-file .env.yaml"
   },
