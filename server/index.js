@@ -3,12 +3,11 @@ const express = require('express');
 const { Quotes } = require('./api/quotes');
 const { Weather } = require('./api/weather');
 const { Location } = require('./api/geolocation');
-const { db, getAllJournals, addJournals, deleteJournal, updateJournal} = require('./db/dbBase.js');
-const { GoogleStrategy } = require('./passport.js');
+const { Journals } = require('./api/journals');
+require('./passport.js');
 const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const sequelize = require('./db/dbBase.js');
 
 const dotenv = require('dotenv');
 dotenv.config({
@@ -23,17 +22,18 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(dist));
-app.use('/api/quotes', Quotes);
-app.use('/api/weather', Weather);
-app.use('/api/location', Location);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
+app.use('/api/quotes', Quotes);
+app.use('/api/weather', Weather);
+app.use('/api/location', Location);
+app.use('/api/journals', Journals);
 
 // line 34 - 61 all used for google login
 app.use(
   session({
-    secret: process.env.clientSecret,
+    secret: process.env.CLIENTSECRET,
     saveUninitialized: false,
     resave: true,
   }),
@@ -60,7 +60,6 @@ app.get('/auth/google/callback',
     res.redirect('/');
   });
 
-
 app.get('/isloggedin', (req, res) => {
   // check to see if the cookie key is headstrong
   if (req.cookies.Headstrong) {
@@ -77,35 +76,11 @@ app.delete('/logout', (req, res) => {
   res.json(false);
 });
 
-
-app.get('/api/journals', (req, res) => {
-  return getAllJournals(req.cookies.Headstrong)
-    .then((data) => res.json(data))
-    .catch((err) => console.warn(err));
-});
-
-app.post('/api/journals', (req, res) => {
-//passing saved cookie with users name to add journals
-  return addJournals(req.body, req.cookies.Headstrong)
-    .then((data) => res.json(data))
-    .catch((err) => console.warn(err));
-});
-
-app.delete('/api/journals/:id', (req, res) => {
-  return deleteJournal(req.params)
-    .then((data) => res.json(data))
-    .catch((err) => console.warn(err));
-});
-
-app.put('/api/journals', (req, res) => {
-  console.info(req.body);
-  return updateJournal(req.body)
-    .then((data) => res.send(data))
-    .catch((err) => console.log(err));
-});
-
-
-
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(dist, 'index.html'), (err) => {
+    if (err) {res.status(500).send(err);}
+  })
+})
 
 app.listen(port, () => {
   console.log(`Server is listening on http://127.0.0.1:${port}`);

@@ -1,25 +1,20 @@
 const Sequelize = require('sequelize');
-const { QueryTypes } = require('sequelize');
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 
-const host = process.env.host;
-const database = process.env.database;
-const password = process.env.password;
-const username = process.env.username;
+const { DB_HOST, DB_NAME, DB_PASSWORD, DB_USER } = process.env;
 
-const sequelize = new Sequelize(database, username, password, {
-  host: host,
+const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
+  host: DB_HOST,
   dialect: 'mysql',
-
+  logging: false
 });
 
 sequelize.authenticate()
   .then(() => console.info('Connected to the Database'))
-  .catch((err) => console.warn(err));
+  .catch((err) => console.warn('Cannot connect to db:\n', err));
 
 
 const Entries = sequelize.define('entries', {
-
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -59,6 +54,7 @@ const Entries = sequelize.define('entries', {
   }
 
 });
+Entries.sync();
 
 const getAllJournals = (user) => {
   if (user) {

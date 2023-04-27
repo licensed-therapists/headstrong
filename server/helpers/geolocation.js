@@ -1,9 +1,7 @@
 const axios = require('axios');
-const config = require('../config');
 
 const getGeolocationByIP = (userIP) => {
-
-  const url = `http://api.ipstack.com/${userIP}?access_key=${process.env.access_key}`;
+  const url = `http://api.ipstack.com/${userIP}?access_key=${process.env.IPSTACK_TOKEN}`;
 
   return axios.get(url)
     .then(({ data }) => data)

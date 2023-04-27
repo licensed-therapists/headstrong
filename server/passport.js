@@ -1,6 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const addJournals = require('./db/dbBase.js');
+const addJournals = require('./db/index.js');
 require('dotenv').config();
 
 // Use the GoogleStrategy within Passport.
@@ -8,8 +8,8 @@ require('dotenv').config();
 //   credentials (in this case, a token, tokenSecret, and Google profile), and
 //   invoke a callback with a user object.
 passport.use(new GoogleStrategy({
-  clientID: process.env.clientID,
-  clientSecret: process.env.clientSecret,
+  clientID: process.env.CLIENTID,
+  clientSecret: process.env.CLIENTSECRET,
   callbackURL: '/auth/google/callback'
 },
 function(token, tokenSecret, profile, done) {
