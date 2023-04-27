@@ -4,11 +4,11 @@ const { Quotes } = require('./api/quotes');
 const { Weather } = require('./api/weather');
 const { Location } = require('./api/geolocation');
 const { db, getAllJournals, addJournals, deleteJournal, updateJournal} = require('./db/index.js');
-const { GoogleStrategy } = require('./passport.js');
+require('./passport.js');
 const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const sequelize = require('./db/index.js');
+// const sequelize = require('./db/index.js');
 
 const dotenv = require('dotenv');
 dotenv.config({
