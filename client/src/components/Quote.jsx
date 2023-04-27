@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Feed = ({ quoteText, quoteAuthor }) => {
+const Quote = ({ quoteText, quoteAuthor }) => {
 
   return (
     <div className='text wrap'>
@@ -12,5 +12,5 @@ const Feed = ({ quoteText, quoteAuthor }) => {
   );
 };
 
-export default Feed;
+export default Quote;
 
