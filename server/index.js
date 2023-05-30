@@ -4,6 +4,7 @@ const { Quotes } = require('./api/quotes');
 const { Weather } = require('./api/weather');
 const { Location } = require('./api/geolocation');
 const { Journals } = require('./api/journals');
+const { Stories } = require('./api/stories');
 require('./passport.js');
 const passport = require('passport');
 const session = require('express-session');
@@ -29,6 +30,7 @@ app.use('/api/quotes', Quotes);
 app.use('/api/weather', Weather);
 app.use('/api/location', Location);
 app.use('/api/journals', Journals);
+app.use('/api/stories', Stories);
 
 // line 34 - 61 all used for google login
 app.use(
