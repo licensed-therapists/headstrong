@@ -14,6 +14,26 @@ sequelize.authenticate()
   .catch((err) => console.warn('Cannot connect to db:\n', err));
 
 
+const Countdown = sequelize.define('countdowns', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
+  },
+  eventName: {
+    type: Sequelize.STRING,
+  },
+  date: {
+    type: Sequelize.DATE,
+  },
+  story: {
+    type: Sequelize.STRING,
+  }
+});
+Countdown.sync();
+
+
 const Entries = sequelize.define('entries', {
   id: {
     type: Sequelize.INTEGER,
