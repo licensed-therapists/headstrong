@@ -9,12 +9,6 @@ module.exports = {
     filename: 'bundle.js'
   },
   watch: true,
-  resolve: { //
-    fallback: {
-      path: require.resolve("path-browserify"),
-      fs: false
-    }
-  },
   module: {
     rules: [
       {

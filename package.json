@@ -25,7 +25,6 @@
     "@mui/icons-material": "^5.8.2",
     "@mui/material": "^5.8.2",
     "axios": "^0.27.2",
-    "browserify-fs": "^1.0.0",
     "cookie-parser": "^1.4.5",
     "css-loader": "^5.0.1",
     "deepai": "^1.0.21",
