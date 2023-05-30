@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Entry from './Entry.jsx';
 import Memory from './Memory.jsx';
 import Quote from './Quote.jsx';
+import Countdown from './Countdown.jsx';
 import Nav from './Nav.jsx';
 import Footer from './Footer.jsx';
 import axios from 'axios';
@@ -13,6 +14,7 @@ const App = () => {
   const [quoteAuthor, setQuoteAuthor] = useState('');
   const [login, setLogin] = useState(false);
   const [entries, setEntries] = useState([]);
+  const [story, setStory] = useState('');
 
   const getAllMemories = () => {
     axios
@@ -66,6 +68,11 @@ const App = () => {
           element={<Memory
             entries={entries}
             getAllMemories={getAllMemories}/>}
+        />
+        <Route
+          path='/countdown'
+          element={<Countdown
+            story={story} />}
         />
       </Routes>
 
