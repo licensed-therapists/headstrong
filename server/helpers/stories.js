@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { Configuration, OpenAIApi } = require('openai');
-const OPENAI_TOKEN = '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';
+const { OPENAI_TOKEN } = process.env;
 
 const configuration = new Configuration({
   apiKey: OPENAI_TOKEN,
@@ -12,12 +12,11 @@ const getStory = async (event, task) => {
   const response = await openai.createCompletion({
     model: "text-davinci-002",
     prompt: `I'm worried about an upcoming ${event} where I have to ${task}. Please write me a story in second person perspective that describes a worst-case scenario for how this event could play out. The story should be roughly 50 words in length.`,
-    max_tokens: 300,
+    max_tokens: 200,
     temperature: 1,
   });
   return response.data;
 }
-
 
 module.exports = {
   getStory
