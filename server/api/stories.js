@@ -3,11 +3,9 @@ const Stories = Router();
 const { getStory } = require('../helpers/stories');
 
 Stories.post('/', async (req, res) => {
-  const { text } = req.body;
-  console.log('text', text);
+  const { event, task } = req.body;
   try {
-    const story = await getStory(text);
-    console.log('story', story);
+    const story = await getStory(event, task);
     res.status(201).send(story);
   } catch (err) {
     console.error('Failed to POST text to API:', err);
