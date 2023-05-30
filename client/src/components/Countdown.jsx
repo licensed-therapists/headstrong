@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { getStory } from '../../../server/helpers/stories';
 
 const Countdown = ({ story, setStory }) => {
-  const [prompt, setPrompt] = useState('');
+  const [event, setEvent] = useState('');
+  const [task, setTask] = useState('');
 
-  const handleInputChange = (e) => {
+  const handleEventChange = (e) => {
     const { value } = e.target;
-    setPrompt(value);
+    setEvent(value);
+    console.log(event);
+  }
+
+  const handleTaskChange = (e) => {
+    const { value } = e.target;
+    setTask(value);
   }
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('/api/stories', { text: prompt });
+      const response = await axios.post('/api/stories', { event, task });
       const { text } = response.data.choices[0];
       console.log(text);
       setStory(text);
-      console.log('story', story);
     } catch (err) {
       console.error('Failed to POST text to API at client:', err);
     }
@@ -29,9 +34,10 @@ const Countdown = ({ story, setStory }) => {
   return (
     <div>
       <h1>Countdown</h1>
-      <input type="text" onChange={handleInputChange}></input>
+      Event:<input type="text" onChange={handleEventChange}></input>
+      Task:<input type="text" onChange={handleTaskChange}></input>
       <button type="submit" onClick={handleSubmit}>Submit</button>
-      <div>{story ? story : null}</div>
+      <div color="black">{story ? story : null}</div>
     </div>
   )
 }
