@@ -33,6 +33,18 @@ const Countdown = sequelize.define('countdowns', {
 });
 Countdown.sync();
 
+const addCountdown = async(body) => {
+  const { event, date, story } = body;
+
+  const newCountdown = await Countdown.create({
+    eventName: event,
+    date,
+    story
+  });
+
+  return newCountdown.save();
+};
+
 
 const Entries = sequelize.define('entries', {
   id: {
@@ -136,5 +148,6 @@ module.exports = {
   addJournals,
   deleteJournal,
   updateJournal,
-  Entries
+  Entries,
+  Countdown
 };
