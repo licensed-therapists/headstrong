@@ -27,6 +27,7 @@
     "axios": "^0.27.2",
     "cookie-parser": "^1.4.5",
     "css-loader": "^5.0.1",
+    "deepai": "^1.0.21",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
