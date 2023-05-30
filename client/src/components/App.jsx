@@ -72,7 +72,8 @@ const App = () => {
         <Route
           path='/countdown'
           element={<Countdown
-            story={story} />}
+            story={story}
+            setStory={setStory} />}
         />
       </Routes>
 
