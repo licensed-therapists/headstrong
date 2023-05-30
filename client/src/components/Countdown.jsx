@@ -3,11 +3,16 @@ import axios from 'axios';
 import { getStory } from '../../../server/helpers/stories';
 
 const Countdown = ({ story, setStory }) => {
-  const [text, setText] = useState('');
+  const [prompt, setPrompt] = useState('');
+
+  const handleInputChange = (e) => {
+    const { value } = e.target;
+    setPrompt(value);
+  }
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('/api/stories', { text });
+      const response = await axios.post('/api/stories', { text: prompt });
       const { text } = response.data.choices[0];
       console.log(text);
       setStory(text);
@@ -15,27 +20,6 @@ const Countdown = ({ story, setStory }) => {
     } catch (err) {
       console.error('Failed to POST text to API at client:', err);
     }
-  }
-
-  // const handleSubmit = async () => {
-  //   try {
-  //     const response = await fetch('/api/stories', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'text/plain'
-  //       },
-  //       body: { text: text }
-  //     });
-  //     console.log(response.data);
-  //     setStory(response.data);
-  //   } catch (err) {
-  //     console.error('Failed to POST text to API at client:', err);
-  //   }
-  // }
-
-  const handleInputChange = (e) => {
-    const { value } = e.target;
-    setText(value);
   }
 
   // useEffect(() => {
