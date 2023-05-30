@@ -14,7 +14,6 @@ const App = () => {
   const [quoteAuthor, setQuoteAuthor] = useState('');
   const [login, setLogin] = useState(false);
   const [entries, setEntries] = useState([]);
-  const [story, setStory] = useState('');
 
   const getAllMemories = () => {
     axios
@@ -71,9 +70,7 @@ const App = () => {
         />
         <Route
           path='/countdown'
-          element={<Countdown
-            story={story}
-            setStory={setStory} />}
+          element={<Countdown />}
         />
       </Routes>
 
