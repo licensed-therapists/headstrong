@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Entry from './Entry.jsx';
 import Memory from './Memory.jsx';
 import Quote from './Quote.jsx';
+import Countdown from './Countdown.jsx';
 import Nav from './Nav.jsx';
 import Footer from './Footer.jsx';
 import axios from 'axios';
@@ -66,6 +67,10 @@ const App = () => {
           element={<Memory
             entries={entries}
             getAllMemories={getAllMemories}/>}
+        />
+        <Route
+          path='/countdown'
+          element={<Countdown />}
         />
       </Routes>
 
