@@ -3,6 +3,7 @@ import Entry from './Entry.jsx';
 import Memory from './Memory.jsx';
 import AntiAsmr from './AntiAsmr.jsx'
 import Quote from './Quote.jsx';
+import Countdown from './Countdown.jsx';
 import Nav from './Nav.jsx';
 import Footer from './Footer.jsx';
 import axios from 'axios';
@@ -67,6 +68,10 @@ const App = () => {
           element={<Memory
             entries={entries}
             getAllMemories={getAllMemories}/>}
+        />
+        <Route
+          path='/countdown'
+          element={<Countdown />}
         />
         <Route
           path='/antiasmr'

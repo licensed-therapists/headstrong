@@ -14,6 +14,42 @@ sequelize.authenticate()
   .catch((err) => console.warn('Cannot connect to db:\n', err));
 
 
+const Countdown = sequelize.define('countdowns', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
+  },
+  username: {
+    type: Sequelize.STRING,
+  },
+  eventName: {
+    type: Sequelize.STRING,
+  },
+  date: {
+    type: Sequelize.DATE,
+  },
+  story: {
+    type: Sequelize.STRING,
+  }
+});
+Countdown.sync();
+
+const addCountdown = async(body, user) => {
+  const { event, date, story } = body;
+
+  const newCountdown = await Countdown.create({
+    username: user,
+    eventName: event,
+    date,
+    story
+  });
+
+  return newCountdown.save();
+};
+
+
 const Entries = sequelize.define('entries', {
   id: {
     type: Sequelize.INTEGER,
@@ -116,5 +152,6 @@ module.exports = {
   addJournals,
   deleteJournal,
   updateJournal,
-  Entries
+  Entries,
+  Countdown
 };
