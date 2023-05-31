@@ -1,12 +1,25 @@
 const { Router } = require('express');
 const Stories = Router();
 const { getStory } = require('../helpers/stories');
-const { addCountdown } = require('../db/index');
+const { Countdown, addCountdown } = require('../db/index');
+
+Stories.get('/', async (req, res) => {
+  const { Headstrong: user } = req.cookies;
+  try {
+    const countdown = await Countdown.findOne({ where: { username: user }});
+    if (!countdown) {
+      throw countdown;
+    }
+    res.status(200).send(countdown);
+  } catch (err) {
+    console.error('Failed to GET story from db:', err);
+  }
+})
 
 Stories.post('/', async (req, res) => {
   const { event, task, date } = req.body;
   const { Headstrong } = req.cookies;
-  try {
+  try { // edit this to edit current entry OR create if not exists
     const story = await getStory(event, task);
     const { text } = story.choices[0];
     await addCountdown(Headstrong, event, date, text);
