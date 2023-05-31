@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Entry from './Entry.jsx';
 import Memory from './Memory.jsx';
+import AntiAsmr from './AntiAsmr.jsx'
 import Quote from './Quote.jsx';
 import Countdown from './Countdown.jsx';
 import Nav from './Nav.jsx';
@@ -71,6 +72,12 @@ const App = () => {
         <Route
           path='/countdown'
           element={<Countdown />}
+        />
+        <Route
+          path='/antiasmr'
+          element={<AntiAsmr
+            entries={entries}
+            />}
         />
       </Routes>
 
