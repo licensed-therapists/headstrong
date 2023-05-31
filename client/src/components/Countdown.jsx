@@ -10,6 +10,23 @@ const Countdown = () => {
   const [story, setStory] = useState('');
   const [countdown, setCountdown] = useState('');
 
+  const getDate = async () => {
+    try {
+      const response = await axios.get('/api/stories/');
+      const { date } = response.data;
+      if (date) {
+        setDate(new Date(date));
+      }
+      console.log(response.data.date);
+    } catch (err) {
+      console.error('Failed to GET date from db to client:', err);
+    }
+  }
+
+  useEffect(() => {
+    getDate();
+  }, [])
+
   const handleEventChange = (e) => {
     const { value } = e.target;
     setEvent(value);
@@ -22,10 +39,10 @@ const Countdown = () => {
 
   const handleSubmit = async () => {
     try {
-      // const response = await axios.post('/api/stories', { event, task, date });
-      // const { text } = response.data.choices[0];
-      // console.log(text);
-      // setStory(text);
+      const response = await axios.post('/api/stories', { event, task, date });
+      const { text } = response.data.choices[0];
+      console.log(text);
+      setStory(text);
       console.log('hi');
     } catch (err) {
       console.error('Failed to POST text to API at client:', err);
@@ -39,8 +56,9 @@ const Countdown = () => {
     setDate(newDate);
   };
 
-  useEffect(() => {
+  useEffect(() => {  
     const intervalId = setInterval(() => {
+      
       if (date) {
         const now = new Date();
         const timeDifference = date.getTime() - now.getTime();
@@ -63,13 +81,6 @@ const Countdown = () => {
       clearInterval(intervalId);
     };
   }, [date]);
-
-//   const CountdownText = styled(Typography)`
-//   color: red;
-//   font-size: 24px;
-//   line-height: 1.5;
-//   white-space: pre-line;
-// `;
 
   const countdownStyle = {
     color: 'red',
@@ -100,6 +111,7 @@ const Countdown = () => {
       Task:<input type="text" onChange={handleTaskChange}></input>
       Date:<input type="date" onChange={handleDateChange}></input>
       <button type="submit" onClick={handleSubmit}>Submit</button>
+      {/* <button type="submit" onClick={getDate}>Test GET date</button> */}
       <div>{story ? story : null}</div>
     </div>
   )
