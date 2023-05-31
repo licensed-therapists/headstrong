@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Entry from './Entry.jsx';
 import Memory from './Memory.jsx';
+import AntiAsmr from './AntiAsmr.jsx'
 import Quote from './Quote.jsx';
 import Nav from './Nav.jsx';
 import Footer from './Footer.jsx';
@@ -66,6 +67,12 @@ const App = () => {
           element={<Memory
             entries={entries}
             getAllMemories={getAllMemories}/>}
+        />
+        <Route
+          path='/antiasmr'
+          element={<AntiAsmr
+            entries={entries}
+            />}
         />
       </Routes>
 
