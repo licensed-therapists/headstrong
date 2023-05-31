@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Typography } from '@mui/material';
+import { styled } from '@mui/system';
 
 const Countdown = () => {
   const [event, setEvent] = useState('');
@@ -20,10 +22,11 @@ const Countdown = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('/api/stories', { event, task, date });
-      const { text } = response.data.choices[0];
-      console.log(text);
-      setStory(text);
+      // const response = await axios.post('/api/stories', { event, task, date });
+      // const { text } = response.data.choices[0];
+      // console.log(text);
+      // setStory(text);
+      console.log('hi');
     } catch (err) {
       console.error('Failed to POST text to API at client:', err);
     }
@@ -51,7 +54,7 @@ const Countdown = () => {
           const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
           const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
   
-          setCountdown(`Countdown: ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`);
+          setCountdown(`${days} days\n${hours} hours\n${minutes} minutes\n${seconds} seconds`);
         }
       }
     }, 1000);
@@ -60,17 +63,44 @@ const Countdown = () => {
       clearInterval(intervalId);
     };
   }, [date]);
-  
+
+//   const CountdownText = styled(Typography)`
+//   color: red;
+//   font-size: 24px;
+//   line-height: 1.5;
+//   white-space: pre-line;
+// `;
+
+  const countdownStyle = {
+    color: 'red',
+    fontSize: '24px',
+    lineHeight: '1.5',
+    whiteSpace: 'pre-line',
+    textAlign: 'center'
+  };
+
+  const daysStyle = {
+    fontSize: '64px',
+    fontWeight: 'bold',
+  };
 
   return (
     <div>
-      <h1>Countdown</h1>
+      <Typography component="div" style={countdownStyle}>
+        {countdown ? (
+          countdown.split('\n').map((line, index) => {
+            if (index === 0) {
+              return <span key={index} style={daysStyle}>{line}{'\n'}</span>;
+            }
+            return line + '\n';
+          })
+        ) : null}
+      </Typography>
       Event:<input type="text" onChange={handleEventChange}></input>
       Task:<input type="text" onChange={handleTaskChange}></input>
       Date:<input type="date" onChange={handleDateChange}></input>
       <button type="submit" onClick={handleSubmit}>Submit</button>
       <div>{story ? story : null}</div>
-      <div>{countdown ? countdown : null}</div>
     </div>
   )
 }
