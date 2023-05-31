@@ -13,6 +13,7 @@ Stories.get('/', async (req, res) => {
     res.status(200).send(countdown);
   } catch (err) {
     console.error('Failed to GET story from db:', err);
+    res.sendStatus(500);
   }
 })
 
