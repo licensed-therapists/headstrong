@@ -19,11 +19,11 @@ Stories.get('/', async (req, res) => {
 
 Stories.post('/', async (req, res) => {
   const { event, task, date } = req.body;
-  const { Headstrong } = req.cookies;
+  const { Headstrong: user } = req.cookies;
   try { // edit this to edit current entry OR create if not exists
     const story = await getStory(event, task);
     const { text } = story.choices[0];
-    await addCountdown(Headstrong, event, date, text);
+    await addCountdown(user, event, date, text);
     res.status(201).send(story);
   } catch (err) {
     console.error('Failed to POST text to API:', err);
