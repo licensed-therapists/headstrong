@@ -12,7 +12,7 @@ const Countdown = () => {
 
   const getDate = async () => {
     try {
-      const response = await axios.get('/api/stories/');
+      const response = await axios.get('/api/stories');
       const { date } = response.data;
       if (date) {
         setDate(new Date(date));
@@ -23,8 +23,19 @@ const Countdown = () => {
     }
   }
 
+  const getStory = async () => {
+    try {
+      const response = await axios.get('/api/stories');
+      const { story } = response.data;
+      setStory(story);
+    } catch (err) {
+      console.error('Failed to GET story from db to client:', err);
+    }
+  }
+
   useEffect(() => {
     getDate();
+    getStory();
   }, [])
 
   const handleEventChange = (e) => {
