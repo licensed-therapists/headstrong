@@ -20,11 +20,16 @@ Stories.get('/', async (req, res) => {
 Stories.post('/', async (req, res) => {
   const { event, task, date } = req.body;
   const { Headstrong: user } = req.cookies;
-  try { // edit this to edit current entry OR create if not exists
-    const story = await getStory(event, task);
-    const { text } = story.choices[0];
-    await addCountdown(user, event, date, text);
-    res.status(201).send(story);
+  try {
+    const response = await getStory(event, task);
+    const { text: story } = response.choices[0];
+    const existingStory = await Countdown.findOne({ where: { username: user } });
+    if (existingStory) {
+      await existingStory.update({ event, date, story });
+    } else {
+      await addCountdown(user, event, date, text);
+    }
+    res.status(201).send(response);
   } catch (err) {
     console.error('Failed to POST text to API:', err);
     res.sendStatus(500);
