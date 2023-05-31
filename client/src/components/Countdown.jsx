@@ -20,7 +20,7 @@ const Countdown = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('/api/stories', { event, task });
+      const response = await axios.post('/api/stories', { event, task, date });
       const { text } = response.data.choices[0];
       console.log(text);
       setStory(text);
