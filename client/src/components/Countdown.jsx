@@ -152,7 +152,7 @@ const Countdown = () => {
     marginRight: '10px',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'flex-start',
   };
 
   const labelStyle = {
