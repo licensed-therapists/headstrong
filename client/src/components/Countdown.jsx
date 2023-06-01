@@ -101,12 +101,25 @@ const Countdown = () => {
     fontSize: '24px',
     lineHeight: '1.5',
     whiteSpace: 'pre-line',
-    textAlign: 'center'
+    textAlign: 'center',
   };
-
-  const daysStyle = {
-    fontSize: '64px',
+  
+  const timeUnitContainerStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  };
+  
+  const timeUnitStyle = {
+    fontSize: '46px',
     fontWeight: 'bold',
+    margin: '0 10px',
+  };
+  
+  const daysStyle = {
+    fontSize: '80px',
+    fontWeight: 'bold',
+    margin: '0 10px',
   };
 
   const pageStyle = {
@@ -120,24 +133,28 @@ const Countdown = () => {
   };
 
   const storyContainerStyle = {
-    marginBottom: '20px'
+    marginBottom: '20px',
+    fontFamily: 'Helvetica',
+    fontSize: '20px'
   };
 
   const inputContainerStyle = {
     display: 'flex',
     flexDirection: 'row',
-    marginBottom: '20px'
+    marginBottom: '20px',
+    justifyContent: 'center',
   };
 
   const inputRowStyle = {
-    marginRight: '10px'
+    marginRight: '10px',
+    display: 'flex',
+    alignItems: 'center',
   };
 
   const labelStyle = {
     color: 'white',
     marginRight: '5px',
-    display: 'flex',
-    flexDirection: 'column-reverse'
+    fontFamily: 'Helvetica',
   };
 
   const inputFieldStyle = {
@@ -146,8 +163,9 @@ const Countdown = () => {
     border: '1px solid white',
     borderRadius: '5px',
     padding: '5px',
-  };
-
+    fontFamily: 'Helvetica',
+    outline: 'none',
+  }
 
   const submitButtonStyle = {
     backgroundColor: '#ef3340',
@@ -155,7 +173,9 @@ const Countdown = () => {
     border: '1px solid white',
     borderRadius: '5px',
     padding: '5px 10px',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    fontFamily: 'Helvetica',
+    outline: 'none',
   };
 
   return (
@@ -165,9 +185,17 @@ const Countdown = () => {
           {countdown ? (
             countdown.split('\n').map((line, i) => {
               if (i === 0) {
-                return <span key={i} style={daysStyle}>{line}{'\n'}</span>;
+                return (
+                  <div key={i} style={timeUnitContainerStyle}>
+                    <span style={daysStyle}>{line}</span>
+                  </div>
+                );
               }
-              return line + `\n`;
+              return (
+                <span key={i} style={timeUnitStyle}>
+                  {line}
+                </span>
+              );
             })
           ) : null}
         </Typography>
@@ -176,6 +204,46 @@ const Countdown = () => {
         <div>{story ? story : null}</div>
       </div>
       <div style={inputContainerStyle}>
+        <div style={inputRowStyle}>
+          <label htmlFor="event" style={labelStyle}>Event:</label>
+          <input
+            type="text"
+            id="event"
+            placeholder=""
+            style={inputFieldStyle}
+            onChange={handleEventChange}
+          />
+        </div>
+        <div style={inputRowStyle}>
+          <label htmlFor="task" style={labelStyle}>Task:</label>
+          <input
+            type="text"
+            id="task"
+            placeholder=""
+            style={inputFieldStyle}
+            onChange={handleTaskChange}
+          />
+        </div>
+        <div style={inputRowStyle}>
+          <label htmlFor="date" style={labelStyle}>Date:</label>
+          <input
+            type="date"
+            id="date"
+            style={inputFieldStyle}
+            onChange={handleDateChange}
+          />
+        </div>
+        <div style={inputRowStyle}>
+          <button
+            type="submit"
+            style={submitButtonStyle}
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+      {/* <div style={inputContainerStyle}>
         <div style={inputRowStyle}>
           <label htmlFor="event" style={labelStyle}>Event:</label>
           <input
@@ -214,7 +282,7 @@ const Countdown = () => {
             Submit
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
