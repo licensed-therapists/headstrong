@@ -104,6 +104,7 @@ const Entry = () => {
             onChange={(e) => handleChange(e, setJournalImage)}/>
         </div>
         <button className="urlButton" onClick={handleSubmit}>Submit</button>
+        <button className="urlButton">test</button>
         { journalImage ? <img style={{ height: 'auto', width: '300px' }} src={journalImage} /> : null }
       </form>
 

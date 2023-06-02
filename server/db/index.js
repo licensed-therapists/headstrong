@@ -87,6 +87,9 @@ const Entries = sequelize.define('entries', {
 
   mood: {
     type: Sequelize.STRING
+  },
+  favSounds: {
+    type: Sequelize.STRING
   }
 
 });
@@ -115,7 +118,7 @@ const deleteJournal = (body) => {
 
 const addJournals = async(body, user) => {
 
-  const { mood, title, blog, journalImage, temp, weatherDescription } = body;
+  const { mood, title, blog, journalImage, temp, weatherDescription, favSounds } = body;
 
   const newEntry = await Entries.create({
     username: user,
@@ -131,13 +134,14 @@ const addJournals = async(body, user) => {
 };
 
 const updateJournal = (body) => {
-  const { username, title, blog, id, journalImage } = body;
+  const { username, title, blog, id, journalImage, favSounds } = body;
   //first object is what you want to change
   return Entries.update({
     username: username,
     blog: blog,
     title: title,
     journalImage: journalImage,
+    favSounds: favSounds
   },
   {
     where: {
@@ -146,6 +150,9 @@ const updateJournal = (body) => {
   });
 
 };
+
+
+
 
 module.exports = {
   getAllJournals,
