@@ -13,7 +13,7 @@ const getStory = async (event, task) => {
     model: "text-davinci-002",
     prompt: `I'm worried about an upcoming ${event} where I have to ${task}. Please write me a story in second person perspective that describes a worst-case scenario for how this event could play out. The story should be roughly 50 words in length.`,
     max_tokens: 200,
-    temperature: 1,
+    temperature: 1.40,
   });
   return response.data;
 }
