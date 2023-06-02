@@ -6,6 +6,7 @@ const Countdown = () => {
   const [event, setEvent] = useState('');
   const [task, setTask] = useState('');
   const [date, setDate] = useState('');
+  const [stressors, setStressors] = useState('');
   const [story, setStory] = useState('');
   const [countdown, setCountdown] = useState('');
 
@@ -46,11 +47,15 @@ const Countdown = () => {
     setTask(value);
   }
 
+  const handleStressorsChange = (e) => {
+    const { value } = e.target;
+    setStressors(value);
+  }
+
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('/api/stories', { event, task, date });
+      const response = await axios.post('/api/stories', { event, task, date, stressors });
       const { text } = response.data.choices[0];
-      console.log(text);
       setStory(text);
     } catch (err) {
       console.error('Failed to POST text to API at client:', err);
@@ -225,7 +230,6 @@ const Countdown = () => {
           <input
             type="text"
             id="event"
-            placeholder=""
             style={inputFieldStyle}
             onChange={handleEventChange}
           />
@@ -235,9 +239,17 @@ const Countdown = () => {
           <input
             type="text"
             id="task"
-            placeholder=""
             style={inputFieldStyle}
             onChange={handleTaskChange}
+          />
+        </div>
+        <div style={inputRowStyle}>
+          <label htmlFor="task" style={labelStyle}>stressors</label>
+          <input
+            type="text"
+            id="stressors"
+            style={inputFieldStyle}
+            onChange={handleStressorsChange}
           />
         </div>
         <div style={inputRowStyle}>
