@@ -18,16 +18,16 @@ Stories.get('/', async (req, res) => {
 })
 
 Stories.post('/', async (req, res) => {
-  const { event, task, date } = req.body;
+  const { event, date, task, stressors } = req.body;
   const { Headstrong: user } = req.cookies;
   try {
     const response = await getStory(event, task);
     const { text: story } = response.choices[0];
     const existingStory = await Countdown.findOne({ where: { username: user } });
     if (existingStory) {
-      await existingStory.update({ event, date, story });
+      await existingStory.update({ event, date, task, stressors, story });
     } else {
-      await addCountdown(user, event, date, text);
+      await addCountdown(user, event, date, task, stressors, story);
     }
     res.status(201).send(response);
   } catch (err) {
