@@ -30,18 +30,26 @@ const Countdown = sequelize.define('countdowns', {
   date: {
     type: Sequelize.STRING,
   },
+  task: {
+    type: Sequelize.STRING,
+  },
+  stressors: {
+    type: Sequelize.STRING,
+  },
   story: {
     type: Sequelize.TEXT('long'),
   }
 });
 Countdown.sync({alter: true});
 
-const addCountdown = async(user, event, date, story) => {
+const addCountdown = async(username, event, date, task, stressors, story) => {
   try {
     const newCountdown = await Countdown.create({
-      username: user,
+      username,
       event,
       date,
+      task,
+      stressors,
       story
     });
     return newCountdown.save();
