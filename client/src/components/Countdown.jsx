@@ -56,7 +56,6 @@ const Countdown = () => {
     try {
       const response = await axios.post('/api/stories', { event, task, date, stressors });
       const { text } = response.data.choices[0];
-      console.log(text);
       setStory(text);
     } catch (err) {
       console.error('Failed to POST text to API at client:', err);
@@ -231,7 +230,6 @@ const Countdown = () => {
           <input
             type="text"
             id="event"
-            placeholder=""
             style={inputFieldStyle}
             onChange={handleEventChange}
           />
@@ -241,7 +239,6 @@ const Countdown = () => {
           <input
             type="text"
             id="task"
-            placeholder=""
             style={inputFieldStyle}
             onChange={handleTaskChange}
           />
@@ -251,7 +248,6 @@ const Countdown = () => {
           <input
             type="text"
             id="stressors"
-            placeholder=""
             style={inputFieldStyle}
             onChange={handleStressorsChange}
           />
