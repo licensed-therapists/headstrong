@@ -21,7 +21,7 @@ Stories.post('/', async (req, res) => {
   const { event, date, task, stressors } = req.body;
   const { Headstrong: user } = req.cookies;
   try {
-    const response = await getStory(event, task);
+    const response = await getStory(event, task, stressors);
     const { text: story } = response.choices[0];
     const existingStory = await Countdown.findOne({ where: { username: user } });
     if (existingStory) {
