@@ -56,7 +56,7 @@ const Countdown = () => {
     setStressors(value);
   }
 
-  const resetForm = () => {
+  const clearFormInputs = () => {
     eventRef.current.value = '';
     taskRef.current.value = '';
     stressorsRef.current.value = '';
@@ -65,7 +65,7 @@ const Countdown = () => {
 
   const handleSubmit = async () => {
     try {
-      resetForm();
+      clearFormInputs();
       const response = await axios.post('/api/stories', { event, task, date, stressors });
       const { text } = response.data.choices[0];
       setStory(text);
