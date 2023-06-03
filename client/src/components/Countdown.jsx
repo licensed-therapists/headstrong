@@ -62,6 +62,15 @@ const Countdown = () => {
     }
   }
 
+  const handleDelete = async () => {
+    try {
+      await axios.delete('/api/stories/');
+      setStory('');
+    } catch (err) {
+      console.error('Failed to DELETE story at client:', err);
+    }
+  }
+
   const handleDateChange = (e) => {
     const { value } = e.target;
     const [year, month, day] = value.split('-');
@@ -216,7 +225,7 @@ const Countdown = () => {
                 </span>
               );
             })
-          ) : null}
+          ) : <div>Fill out the prompts below</div>}
         </Typography>
       </div>
       { story &&
@@ -268,6 +277,15 @@ const Countdown = () => {
             onClick={handleSubmit}
           >
             Submit
+          </button>
+        </div>
+        <div style={inputRowStyle}>
+          <button
+            type="submit"
+            style={submitButtonStyle}
+            onClick={handleDelete}
+          >
+            Delete
           </button>
         </div>
       </div>
