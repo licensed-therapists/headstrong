@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 import NoMemory from './NoMemory.jsx';
+import SoundPlayer from './SoundStuff/SoundPlayer.jsx';
+import soundFile from './SoundStuff/ah_jesus_trimmed.mp3';
 
 const Memory = ({ entries, getAllMemories }) => {
 
@@ -46,6 +48,7 @@ const Memory = ({ entries, getAllMemories }) => {
     : (
       <div className='text wrap' key={id}>
         <h2>Welcome back, {username}</h2>
+        <SoundPlayer soundFile={soundFile} />
         <div>
           <i>Your memory from {timeStamp} | It was {temp} and {weatherDescription} and you were feeling {mood}% happy!</i>
         </div>

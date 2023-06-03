@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import SoundPlayer from './SoundStuff/SoundPlayer.jsx';
+import soundFile from './SoundStuff/ah_jesus_trimmed.mp3';
 
 
 const SoundCloudWidget = () => {
@@ -28,7 +30,7 @@ const SoundCloudWidget = () => {
 
     nailsOnChalkboard: '1526385211',
 
-    sleepMusicClip: '1526385187',
+    //sleepMusicClip: '1526385187',
 
     styrofoamClip: '1526385172',
 
@@ -40,8 +42,8 @@ const SoundCloudWidget = () => {
   const clipsArray = Object.values(clipsObject)
 //                      bird            ramen         mac           nails         vac
   const upperMoons = ['1526375440', '1526385283', '1526385226', '1526385211', '1526385151' ]
-  
-  const lowerMoons = ['1526385292', '1526385259', '1526385250', '1526385187', '1526385172', '1526473978']
+//                      balloon         dryErase      forkpot     styrofoam     PtRadio
+  const lowerMoons = ['1526385292', '1526385259', '1526385250', '1526385172', '1526473978']
 
   
 
@@ -104,7 +106,7 @@ const updateFavSound = () => {
     })
     .catch(error => {
       console.error('Error fetching recent mood:', error);
-    });
+    });       
 };
 
 
@@ -116,6 +118,7 @@ useEffect(() => {
 
   return (
     <div style={{ textAlign: 'center' }}>
+      <SoundPlayer soundFile={soundFile} />
       <h2>Welcome back</h2>
       <div style={{ marginBottom: '20px' }}>
         <i>Enjoy some vexatious Anti-ASMR 🤗</i>
@@ -141,3 +144,12 @@ useEffect(() => {
 };
 
 export default SoundCloudWidget;
+
+
+//yesterday got a refresh button that changes the sound without refreshing the page, and 
+//am able to get favorited sound and load that into the player to play
+
+//which then page loads the sound thats played is now based on the most recent mood
+
+
+//i want to see if there are any sound to art apis or some kind of visual component i can add

@@ -6,7 +6,8 @@ import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
-
+import SoundPlayer from './SoundStuff/SoundPlayer.jsx';
+import soundFile from './SoundStuff/ah_jesus_trimmed.mp3';
 
 const Entry = () => {
   const [title, setTitle] = useState('');
@@ -81,6 +82,7 @@ const Entry = () => {
 
   return (
     <div className="text wrap">
+      <SoundPlayer soundFile={soundFile} />
       <form>
         <div className="weather">Currently {temp} and {weatherDescription}</div>
         <div>
@@ -104,7 +106,6 @@ const Entry = () => {
             onChange={(e) => handleChange(e, setJournalImage)}/>
         </div>
         <button className="urlButton" onClick={handleSubmit}>Submit</button>
-        <button className="urlButton">test</button>
         { journalImage ? <img style={{ height: 'auto', width: '300px' }} src={journalImage} /> : null }
       </form>
 

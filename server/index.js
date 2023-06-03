@@ -72,25 +72,6 @@ app.get('/isloggedin', (req, res) => {
 });
 
 
-app.get('/api/journals/recent-mood', async (req, res) => {
-  try {
-    const entry = await Entries.findOne({
-      order: [['createdAt', 'DESC']],
-    });
-
-    if (entry) {
-      res.json({ mood: entry.mood });
-    } else {
-      res.json({ mood: '' });
-    }
-  } catch (error) {
-    console.error('Error fetching recent mood:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
-
-
 
 // route to logout
 app.delete('/logout', (req, res) => {
