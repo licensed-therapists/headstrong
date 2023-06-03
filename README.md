@@ -3,7 +3,8 @@
 Senior Immersion Greenfield App
 Product Owner: Edward Ellington
 Scrum Master: Ian Wright
-Development Team: Edward Ellington, Caity Opelka, Patrice Williams, Ian Wright
+Original Development Team: Edward Ellington, Caity Opelka, Patrice Williams, Ian Wright
+Legacy Development Team: Emmy Bishop, Kalypso Homan, Marvas McCladdie
 
 ## Description
 
@@ -28,6 +29,9 @@ https://api.ipify.org
 
 Quotes API
 https://type.fit/api/quotes
+
+OpenAI API
+https://platform.openai.com/
 
 Sample data can be found in the project's root
 
