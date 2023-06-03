@@ -55,10 +55,9 @@ const SoundCloudWidget = () => {
   const handleRefresh = () => {
     const randomIndex = Math.floor(Math.random() * clipsArray.length);
     setRandomClip(clipsArray[randomIndex]);
-    
   };
 
-  
+
 console.log(recentMood)
 
 const fetchUserMood = () => {
@@ -94,8 +93,7 @@ const updateFavSound = () => {
     .then(response => {
       const recentMood = response.data[response.data.length - 1];
       const ID = recentMood.id;
-      const newFavSound = randomClip; // Use the current randomClip as the new value for favSounds
-
+      const newFavSound = randomClip;
       axios.put(`/api/journals/${ID}`, { favSounds: newFavSound })
         .then(response => {
           console.log('Favorite sound updated:', response.data);
@@ -106,7 +104,7 @@ const updateFavSound = () => {
     })
     .catch(error => {
       console.error('Error fetching recent mood:', error);
-    });       
+    });
 };
 
 
@@ -146,10 +144,3 @@ useEffect(() => {
 export default SoundCloudWidget;
 
 
-//yesterday got a refresh button that changes the sound without refreshing the page, and 
-//am able to get favorited sound and load that into the player to play
-
-//which then page loads the sound thats played is now based on the most recent mood
-
-
-//i want to see if there are any sound to art apis or some kind of visual component i can add

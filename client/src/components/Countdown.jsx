@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Typography from '@mui/material/Typography';
+import SoundPlayer from './SoundStuff/SoundPlayer.jsx';
+import soundFile from './SoundStuff/ah_jesus_trimmed.mp3';
+<SoundPlayer soundFile={soundFile} />
 
 const Countdown = () => {
   const [event, setEvent] = useState('');
