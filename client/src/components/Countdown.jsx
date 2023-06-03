@@ -66,6 +66,8 @@ const Countdown = () => {
     try {
       await axios.delete('/api/stories/');
       setStory('');
+      setDate('');
+      setCountdown('');
     } catch (err) {
       console.error('Failed to DELETE story at client:', err);
     }
@@ -139,7 +141,7 @@ const Countdown = () => {
   const pageStyle = {
     color: 'white',
     background: '#ef3340',
-    padding: '200px',
+    padding: '300px 300px 300px 400px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -225,7 +227,7 @@ const Countdown = () => {
                 </span>
               );
             })
-          ) : <div>Fill out the prompts below</div>}
+          ) : <h1 style={storyDescriptionStyle}>how is this form not self-explanatory? <br/> do you really need me to tell you what to do?</h1>}
         </Typography>
       </div>
       { story &&
@@ -279,15 +281,18 @@ const Countdown = () => {
             Submit
           </button>
         </div>
+        { story ?
         <div style={inputRowStyle}>
-          <button
-            type="submit"
-            style={submitButtonStyle}
-            onClick={handleDelete}
-          >
-            Delete
-          </button>
-        </div>
+        <button
+          type="submit"
+          style={submitButtonStyle}
+          onClick={handleDelete}
+        >
+          Delete
+        </button>
+      </div>
+      : null
+        }
       </div>
     </div>
   )
