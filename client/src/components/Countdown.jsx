@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Typography from '@mui/material/Typography';
 import SoundPlayer from './SoundStuff/SoundPlayer.jsx';
@@ -12,6 +12,10 @@ const Countdown = () => {
   const [stressors, setStressors] = useState('');
   const [story, setStory] = useState('');
   const [countdown, setCountdown] = useState('');
+  const eventRef = useRef(null);
+  const taskRef = useRef(null);
+  const stressorsRef = useRef(null);
+  const dateRef = useRef(null);
 
   const getDate = async () => {
     try {
@@ -55,13 +59,32 @@ const Countdown = () => {
     setStressors(value);
   }
 
+  const clearFormInputs = () => {
+    eventRef.current.value = '';
+    taskRef.current.value = '';
+    stressorsRef.current.value = '';
+    dateRef.current.value = '';
+  }
+
   const handleSubmit = async () => {
     try {
+      clearFormInputs();
       const response = await axios.post('/api/stories', { event, task, date, stressors });
       const { text } = response.data.choices[0];
       setStory(text);
     } catch (err) {
       console.error('Failed to POST text to API at client:', err);
+    }
+  }
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete('/api/stories/');
+      setStory('');
+      setDate('');
+      setCountdown('');
+    } catch (err) {
+      console.error('Failed to DELETE story at client:', err);
     }
   }
 
@@ -133,7 +156,8 @@ const Countdown = () => {
   const pageStyle = {
     color: 'white',
     background: '#ef3340',
-    padding: '200px',
+    padding: '200px 300px 350px 300px',
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -219,7 +243,7 @@ const Countdown = () => {
                 </span>
               );
             })
-          ) : null}
+          ) : <h1 style={storyDescriptionStyle}>how is this form not self-explanatory? <br/> do you really need me to tell you what to do?</h1>}
         </Typography>
       </div>
       { story &&
@@ -232,7 +256,8 @@ const Countdown = () => {
           <label htmlFor="event" style={labelStyle}>event</label>
           <input
             type="text"
-            id="event"
+            autoComplete="off"
+            ref={eventRef}
             style={inputFieldStyle}
             onChange={handleEventChange}
           />
@@ -241,7 +266,8 @@ const Countdown = () => {
           <label htmlFor="task" style={labelStyle}>task</label>
           <input
             type="text"
-            id="task"
+            autoComplete="off"
+            ref={taskRef}
             style={inputFieldStyle}
             onChange={handleTaskChange}
           />
@@ -250,7 +276,8 @@ const Countdown = () => {
           <label htmlFor="task" style={labelStyle}>stressors</label>
           <input
             type="text"
-            id="stressors"
+            autoComplete="off"
+            ref={stressorsRef}
             style={inputFieldStyle}
             onChange={handleStressorsChange}
           />
@@ -259,7 +286,7 @@ const Countdown = () => {
           <label htmlFor="date" style={labelStyle}>date</label>
           <input
             type="date"
-            id="date"
+            ref={dateRef}
             style={inputFieldStyle}
             onChange={handleDateChange}
           />
@@ -273,6 +300,18 @@ const Countdown = () => {
             Submit
           </button>
         </div>
+        { story ?
+        <div style={inputRowStyle}>
+        <button
+          type="submit"
+          style={submitButtonStyle}
+          onClick={handleDelete}
+        >
+          Delete
+        </button>
+      </div>
+      : null
+        }
       </div>
     </div>
   )
