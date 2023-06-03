@@ -36,6 +36,23 @@ Stories.post('/', async (req, res) => {
   }
 })
 
+Stories.delete('/', async (req, res) => {
+  const { Headstrong: user } = req.cookies;
+  try {
+    const story = await Countdown.findOne({ where: { username: user }})
+    if (story) {
+      await story.destroy();
+      res.sendStatus(200);
+    } else {
+      console.error('Failed to FIND story to delete:', err);
+      res.sendStatus(404);
+    }
+  } catch (err) {
+    console.error('Failed to DELETE story from db:', err);
+    res.sendStatus(500);
+  }
+})
+
 module.exports = {
   Stories,
 }
