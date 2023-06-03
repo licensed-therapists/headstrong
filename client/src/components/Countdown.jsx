@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Typography from '@mui/material/Typography';
 
@@ -9,6 +9,10 @@ const Countdown = () => {
   const [stressors, setStressors] = useState('');
   const [story, setStory] = useState('');
   const [countdown, setCountdown] = useState('');
+  const eventRef = useRef(null);
+  const taskRef = useRef(null);
+  const stressorsRef = useRef(null);
+  const dateRef = useRef(null);
 
   const getDate = async () => {
     try {
@@ -52,8 +56,16 @@ const Countdown = () => {
     setStressors(value);
   }
 
+  const resetForm = () => {
+    eventRef.current.value = '';
+    taskRef.current.value = '';
+    stressorsRef.current.value = '';
+    dateRef.current.value = '';
+  }
+
   const handleSubmit = async () => {
     try {
+      resetForm();
       const response = await axios.post('/api/stories', { event, task, date, stressors });
       const { text } = response.data.choices[0];
       setStory(text);
@@ -141,7 +153,8 @@ const Countdown = () => {
   const pageStyle = {
     color: 'white',
     background: '#ef3340',
-    padding: '300px 300px 300px 400px',
+    padding: '200px 300px 350px 300px',
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -241,6 +254,7 @@ const Countdown = () => {
           <input
             type="text"
             id="event"
+            ref={eventRef}
             style={inputFieldStyle}
             onChange={handleEventChange}
           />
@@ -250,6 +264,7 @@ const Countdown = () => {
           <input
             type="text"
             id="task"
+            ref={taskRef}
             style={inputFieldStyle}
             onChange={handleTaskChange}
           />
@@ -259,6 +274,7 @@ const Countdown = () => {
           <input
             type="text"
             id="stressors"
+            ref={stressorsRef}
             style={inputFieldStyle}
             onChange={handleStressorsChange}
           />
@@ -268,6 +284,7 @@ const Countdown = () => {
           <input
             type="date"
             id="date"
+            ref={dateRef}
             style={inputFieldStyle}
             onChange={handleDateChange}
           />
