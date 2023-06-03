@@ -253,7 +253,7 @@ const Countdown = () => {
           <label htmlFor="event" style={labelStyle}>event</label>
           <input
             type="text"
-            id="event"
+            autoComplete="off"
             ref={eventRef}
             style={inputFieldStyle}
             onChange={handleEventChange}
@@ -263,7 +263,7 @@ const Countdown = () => {
           <label htmlFor="task" style={labelStyle}>task</label>
           <input
             type="text"
-            id="task"
+            autoComplete="off"
             ref={taskRef}
             style={inputFieldStyle}
             onChange={handleTaskChange}
@@ -273,7 +273,7 @@ const Countdown = () => {
           <label htmlFor="task" style={labelStyle}>stressors</label>
           <input
             type="text"
-            id="stressors"
+            autoComplete="off"
             ref={stressorsRef}
             style={inputFieldStyle}
             onChange={handleStressorsChange}
@@ -283,7 +283,6 @@ const Countdown = () => {
           <label htmlFor="date" style={labelStyle}>date</label>
           <input
             type="date"
-            id="date"
             ref={dateRef}
             style={inputFieldStyle}
             onChange={handleDateChange}
