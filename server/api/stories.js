@@ -4,9 +4,9 @@ const { getStory } = require('../helpers/stories');
 const { Countdown, addCountdown } = require('../db/index');
 
 Stories.get('/', async (req, res) => {
-  const { Headstrong: user } = req.cookies;
+  const { Headstrong: username } = req.cookies;
   try {
-    const countdown = await Countdown.findOne({ where: { username: user }});
+    const countdown = await Countdown.findOne({ where: { username }});
     if (!countdown) {
       throw countdown;
     }
@@ -19,15 +19,15 @@ Stories.get('/', async (req, res) => {
 
 Stories.post('/', async (req, res) => {
   const { event, date, task, stressors } = req.body;
-  const { Headstrong: user } = req.cookies;
+  const { Headstrong: username } = req.cookies;
   try {
     const response = await getStory(event, task, stressors);
     const { text: story } = response.choices[0];
-    const existingStory = await Countdown.findOne({ where: { username: user } });
+    const existingStory = await Countdown.findOne({ where: { username } });
     if (existingStory) {
       await existingStory.update({ event, date, task, stressors, story });
     } else {
-      await addCountdown(user, event, date, task, stressors, story);
+      await addCountdown(username, event, date, task, stressors, story);
     }
     res.status(201).send(response);
   } catch (err) {
@@ -37,9 +37,9 @@ Stories.post('/', async (req, res) => {
 })
 
 Stories.delete('/', async (req, res) => {
-  const { Headstrong: user } = req.cookies;
+  const { Headstrong: username } = req.cookies;
   try {
-    const story = await Countdown.findOne({ where: { username: user }})
+    const story = await Countdown.findOne({ where: { username }})
     if (story) {
       await story.destroy();
       res.sendStatus(200);
