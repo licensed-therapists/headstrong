@@ -71,6 +71,8 @@ app.get('/isloggedin', (req, res) => {
   }
 });
 
+
+
 // route to logout
 app.delete('/logout', (req, res) => {
   // delete the cookie key headstrong when logging out

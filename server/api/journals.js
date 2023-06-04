@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const Journals = Router();
-const { getAllJournals, addJournals, deleteJournal, updateJournal } = require('../db');
+const { getAllJournals, addJournals, deleteJournal, updateJournal, updateFavSounds } = require('../db');
 
 Journals.get('/', (req, res) => {
   console.log('cookie?', req.cookies)
@@ -27,6 +27,18 @@ Journals.put('/', (req, res) => {
     .then((data) => res.send(data))
     .catch((err) => console.log(err));
 });
+
+Journals.put('/:id', (req, res) => {
+  const { id } = req.params; // Get the id from the request parameters
+  const updatedData = { id, ...req.body }; // Merge the id with the updated data
+
+  return updateJournal(updatedData) // Pass the updatedData object to the updateJournal function
+    .then((data) => res.send(data))
+    .catch((err) => console.log(err));
+});
+
+
+
 
 module.exports = {
   Journals,

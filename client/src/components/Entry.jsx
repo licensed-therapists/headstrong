@@ -7,7 +7,8 @@ import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDiss
 import createTheme from '@mui/material/styles/createTheme';
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import Grid from '@mui/material/Grid';
-
+import SoundPlayer from './SoundStuff/SoundPlayer.jsx';
+import soundFile from './SoundStuff/ah_jesus_trimmed.mp3';
 
 const Entry = () => {
   const [title, setTitle] = useState('');
@@ -82,6 +83,7 @@ const Entry = () => {
 
   return (
     <div className="text wrap">
+      <SoundPlayer soundFile={soundFile} />
       <form>
         <div className="weather">Currently {temp} and {weatherDescription}</div>
         <div>
