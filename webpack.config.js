@@ -26,10 +26,13 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.jpg$/,
-        use: ['file-loader']
+        test: /\.(jpg)$/,
+        use: ['file-loader'],
+      },
+      {
+        test: /\.(mp3)$/,
+        use: ['file-loader'],
       }
     ]
   }
-
 };
